@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5fa4f2860f7ab4642bdb2c56d7506ad6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 178253
+  packageName: SoundInstance - Complete Sound and Music manager
+  packageVersion: 1.1
+  assetPath: Assets/Plugins/SoundInstance/Core/Editor/SI_Editor.cs
+  uploadId: 397954

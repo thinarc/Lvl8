@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4d753b2301fd951478dfbdaaf1204e84
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 178253
+  packageName: SoundInstance - Complete Sound and Music manager
+  packageVersion: 1.1
+  assetPath: Assets/Plugins/SoundInstance/Demo/Animation/Main Camera.controller
+  uploadId: 397954

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d517d9625f28b044485d688c40aee92b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 178253
+  packageName: SoundInstance - Complete Sound and Music manager
+  packageVersion: 1.1
+  assetPath: Assets/Plugins/SoundInstance/Core/Resources/[SoundInstanceHandler].prefab
+  uploadId: 397954

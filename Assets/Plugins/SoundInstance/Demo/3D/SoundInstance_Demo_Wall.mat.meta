@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0b36659a2b72d29499197160b2eb056f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 178253
+  packageName: SoundInstance - Complete Sound and Music manager
+  packageVersion: 1.1
+  assetPath: Assets/Plugins/SoundInstance/Demo/3D/SoundInstance_Demo_Wall.mat
+  uploadId: 397954

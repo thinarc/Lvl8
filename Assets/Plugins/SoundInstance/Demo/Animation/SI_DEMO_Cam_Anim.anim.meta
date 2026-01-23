@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 218fa6f775c08924ebe24a3f99dd67a9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 178253
+  packageName: SoundInstance - Complete Sound and Music manager
+  packageVersion: 1.1
+  assetPath: Assets/Plugins/SoundInstance/Demo/Animation/SI_DEMO_Cam_Anim.anim
+  uploadId: 397954
