@@ -132,7 +132,7 @@ namespace _Project.Scripts.Player
         {
             var bugCore = bugCollider.GetComponent<Bug.BugCorePart>();
             var dmg = stats.haloDamage * _dmgMultiplier;
-            if (_splashed) dmg *= _splashMulti;
+            if (_splashed) _attackTimer /= _splashMulti;
             if (!_haloReserve.TrySpendReserve(dmg)) return;
             bugCore.TakeDamage(dmg);
             _attackTimer = _attDelay;

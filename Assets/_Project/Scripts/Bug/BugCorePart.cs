@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -6,7 +7,7 @@ namespace _Project.Scripts.Bug
 {
     public class BugCorePart : MonoBehaviour
     {
-        [SerializeField] private float startHp = 10f;
+        public float startHp = 10f;
         [SerializeField, Header("Model")] private float hp;
         private float _animHp;
         private float _expandedHp;
@@ -49,15 +50,18 @@ namespace _Project.Scripts.Bug
             if (hp - damage > 0)
             {
                 hp -= damage;
-                var color = _glow.color;
+                var color1 = _glow.color;
+                var color2 = GetComponentInChildren<SpriteRenderer>().color;
                 _glow.color = Color.yellow / 1.4f;
+                GetComponentInChildren<SpriteRenderer>().color = Color.red / 1.4f;
                 await UniTask.Delay(100);
-                _glow.color = color;
+                _glow.color = color1;
+                GetComponentInChildren<SpriteRenderer>().color = color2;
             }
             else hp = 0;
 
             if (!(hp <= 0)) return;
-            Destroy(gameObject);
+            transform.DOScale(0, 0.5f).SetEase(Ease.Linear).OnComplete(() => Destroy(gameObject));
         }
         
         public void TakeHp(float hpToAdd)

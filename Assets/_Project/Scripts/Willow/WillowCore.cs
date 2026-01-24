@@ -98,6 +98,10 @@ namespace _Project.Scripts.Willow
             var branch = branches[Random.Range(0, branches.Length)];
             return branch.GetWaypoint();
         }
+        public bool CanGiveRandomBranch()
+        {
+            return branches.Length > 0;
+        }
         
         public bool CanTakeDamage() => !_died;
     

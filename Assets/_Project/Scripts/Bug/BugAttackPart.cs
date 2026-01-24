@@ -1,3 +1,4 @@
+using _Project.Scripts.Game;
 using _Project.Scripts.Willow;
 using UnityEngine;
 using WaypointSystem;
@@ -13,6 +14,7 @@ namespace _Project.Scripts.Bug
         [SerializeField] private float increaseHpMultiplier = 0.4f;
         
         [Inject] private WillowCore _willowCore;
+        [Inject] private DayNightController _dayNightController;
         private WaypointAgent _agent;
         private BugCorePart _core;
 
@@ -21,23 +23,53 @@ namespace _Project.Scripts.Bug
 
         private float _attackTimer;
 
-        private void Start()
+        private bool _init;
+        
+        [Inject]
+        private void Construct()
         {
             _agent = GetComponent(typeof(WaypointAgent)) as WaypointAgent;
             _core = GetComponent(typeof(BugCorePart)) as BugCorePart;
 
             if (_agent) _agent.pathToFollow = null;
-            _willowCore.ReadyToReceiveBranches += OnWillowReady;
+            
+            transform.localScale *= Random.Range(1f, 2f);
+            if (_agent) _agent.speed *= Random.Range(0.8f, 1.3f);
         }
 
         private void OnWillowReady()
         {
             if (_agent) _agent.pathToFollow = _willowCore.GetRandomBranch();
             if (_agent) _agent.enabled = true;
+            _prevPosition = transform.position;
         }
 
+        private Vector3 _prevPosition;
         private void Update()
         {
+            var velocity = (transform.position - _prevPosition) / Time.deltaTime;
+            _prevPosition = transform.position;
+            
+            if (velocity.sqrMagnitude > 0.001f)
+            {
+                float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+                var rot = Quaternion.AngleAxis(angle + 30, Vector3.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 5f);
+            }
+
+            
+            if (_willowCore.CanGiveRandomBranch() && !_init)
+            {
+                OnWillowReady();
+                _init = true;
+            }
+
+            if (_init && _dayNightController.currentPhase == DayNightController.DayPhase.Day)
+            {
+                var core = GetComponent<BugCorePart>();
+                core.TakeDamage(core.startHp);
+            }
+            
             if (!_startMoving && _agent.currentTValue != 0) _startMoving = true;
             if (!_attackWillow && _agent.pathToFollow && _startMoving && _agent.currentTValue == 0)
             {

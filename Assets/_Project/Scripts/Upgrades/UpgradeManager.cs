@@ -13,24 +13,25 @@ namespace _Project.Scripts.Upgrades
         [SerializeField] private List<UpgradeData> allUpgrades;
         [SerializeField] private RectTransform[] views;
 
-        private async void Start()
+        private void Start()
         {
             foreach (var view in views)
             {
                 view.transform.DOScale(0, 0);
             }
             
-            transform.DOScale(0, 0f);
+            GetComponent<CanvasGroup>().alpha = 1f;
+            GetComponent<Image>().DOFade(0, 0f);
         }
 
-        public async void UpdateViews()
+        public void UpdateViews()
         {
             Time.timeScale = 0f;
             foreach (var other in views) other.GetComponent<Button>().interactable = true;
             
             try
             {
-                transform.DOScale(1, 0.8f).SetEase(Ease.OutExpo).SetUpdate(true);
+                GetComponent<Image>().DOFade(0.5f, 0.8f).SetEase(Ease.OutExpo).SetUpdate(true);
             }
             catch
             {
@@ -70,6 +71,11 @@ namespace _Project.Scripts.Upgrades
 
                 view.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    foreach (var vd in views)
+                    {
+                        vd.GetComponent<HoverZoomTrigger>().enabled = false;
+                    }
+                    
                     view.DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
                     foreach (var other in views)
                     {
@@ -79,7 +85,7 @@ namespace _Project.Scripts.Upgrades
                             other.DOScale(0, 0.4f * Random.Range(0.8f, 1.5f)).SetEase(Ease.InBack).SetUpdate(true);
                     }
                     
-                    transform.DOScale(0, 0.65f).SetEase(Ease.InExpo).SetUpdate(true);
+                    GetComponent<Image>().DOFade(0, 0.65f).SetEase(Ease.InExpo).SetUpdate(true);
                     Time.timeScale = 1f;
                     
                     ApplyUpgrade(update);
