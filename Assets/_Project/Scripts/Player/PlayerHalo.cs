@@ -82,14 +82,16 @@ namespace _Project.Scripts.Player
             _healthTimer -= Time.deltaTime;
             
             if (_inAttack) return;
-            _haloLight.intensity = _glowIntensity;
-            _haloLight.pointLightOuterRadius = _glowRadius;
+            var intensity = _glowIntensity;
+            var rad = _glowRadius;
             if (_splashed)
             {
-                _haloLight.intensity *= (stats.splashMultiplier / 2);
-                _haloLight.pointLightOuterRadius *= (stats.splashMultiplier / 2);
+                intensity *= (stats.splashMultiplier / 2);
+                rad *= (stats.splashMultiplier / 2);
             }
-            LightPulse.GetPulse(_haloLight, _haloLight.intensity, _haloLight.pointLightOuterRadius, _time, intensityAmp, radiusAmp);
+            _haloLight.intensity = Mathf.MoveTowards(_haloLight.intensity, intensity, Time.deltaTime * speedPulse);
+            _haloLight.pointLightOuterRadius = Mathf.MoveTowards(_haloLight.pointLightOuterRadius, rad, Time.deltaTime * speedPulse);
+            LightPulse.GetPulse(_haloLight, intensity, rad, _time, intensityAmp, radiusAmp);
             _time += Time.deltaTime * speedPulse;
 
             if (UnityEngine.Input.GetKey(KeyCode.F))
@@ -101,6 +103,13 @@ namespace _Project.Scripts.Player
             {
                 GetComponent<CircleCollider2D>().radius = _startRad;
                 _splashed = false;
+            }
+
+            if (_haloLight.intensity > 2.3f)
+            {
+                Debug.Log("strange intensity " + _haloLight.intensity);
+                if (_glowIntensity > 2.3f) _glowIntensity = 2.3f;
+                _haloLight.intensity = 2.3f;
             }
         }
     

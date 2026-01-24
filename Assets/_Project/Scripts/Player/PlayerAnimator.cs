@@ -48,6 +48,9 @@ namespace _Project.Scripts.Player
             HandleSpriteFlip();
             HandleIdleSpeed();
             HandleCharacterTilt();
+            
+            if (_player.FlyHeld) anim.SetFloat(FlewSpeedKey, 1.25f);
+            else anim.SetFloat(FlewSpeedKey, 0.62f);
         }
         
         private void HandleSpriteFlip()
@@ -64,7 +67,7 @@ namespace _Project.Scripts.Player
         
         private void HandleCharacterTilt()
         {
-            var runningTilt = _grounded ? Quaternion.Euler(0, 0, maxTilt * _player.FrameInput.x) : Quaternion.identity;
+            var runningTilt = Quaternion.Euler(0, 0, maxTilt * _player.FrameInput.x);
             anim.transform.up = Vector3.RotateTowards(anim.transform.up, runningTilt * Vector2.up, tiltSpeed * Time.deltaTime, 0f);
         }
         
@@ -98,7 +101,7 @@ namespace _Project.Scripts.Player
             }
             else
             {
-                moveParticles.Stop();
+                // moveParticles.Stop();
             }
         }
         
@@ -121,5 +124,6 @@ namespace _Project.Scripts.Player
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int FlewKey = Animator.StringToHash("Flew");
+        private static readonly int FlewSpeedKey = Animator.StringToHash("FlewSpeed");
     }
 }

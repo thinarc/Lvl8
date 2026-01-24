@@ -18,6 +18,7 @@ namespace _Project.Scripts.Player
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
         public event Action Flew;
+        public bool FlyHeld => _frameInput.FlyHeld;
 
         #endregion
 
@@ -166,5 +167,6 @@ namespace _Project.Scripts.Player
 
         public event Action Flew;
         public Vector2 FrameInput { get; }
+        public bool FlyHeld { get; }
     }
 }

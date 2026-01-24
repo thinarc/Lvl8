@@ -28,6 +28,6 @@ MonoBehaviour:
   groundingForce: -1.5
   grounderDistance: 0.05
   flyPower: 20
-  maxFallSpeed: 4
+  maxFallSpeed: 5
   fallAcceleration: 140
   flyEndEarlyGravityModifier: 4
