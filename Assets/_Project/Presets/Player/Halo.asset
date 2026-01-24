@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Halo
   m_EditorClassIdentifier: 
   haloDamage: 5
-  haloDelay: 0.2
+  haloDelay: 0.4
+  splashMultiplier: 3.4

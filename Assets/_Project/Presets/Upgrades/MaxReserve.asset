@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf67d8f9434414182cae844c381b22f, type: 3}
   m_Name: MaxReserve
   m_EditorClassIdentifier: 
-  type: 2
+  type: 3
   labelEn: Max Reserve
   descEn: Incresed Max Reserve
   labelRu: "\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0430\u044F
     \u044D\u043D\u0435\u0440\u0433\u0438\u044F"
   descRu: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0443\u044E
     \u044D\u043D\u0435\u0440\u0433\u0438\u044E"
-  value: 1
+  value: 1.4

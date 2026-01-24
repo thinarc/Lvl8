@@ -17,7 +17,10 @@ namespace _Project.Scripts.Upgrades
     {
         HaloRadius,
         HaloPower,
+        HaloCooldown,
+        SplashMultiplier,
         ReserveMax,
         IdleRechargeRate,
+        RechargeFromWillowMulti,
     }
 }

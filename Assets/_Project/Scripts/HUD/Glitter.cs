@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Player;
+using _Project.Scripts.Upgrades;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +14,11 @@ namespace _Project.Scripts.HUD
         {
             GetComponent<SpriteRenderer>().DOFade(0f, 0.1f).SetEase(Ease.InExpo);
             transform.DOMove(FindAnyObjectByType<PlayerController>().transform.position + new Vector3(0, 0.08f), 0.1f).SetEase(Ease.Flash);
-            transform.DOScale(0f, 0.2f).SetEase(Ease.InExpo).OnComplete(() => Destroy(gameObject));
+            transform.DOScale(0f, 0.2f).SetEase(Ease.InExpo).OnComplete(() =>
+            {
+                FindAnyObjectByType<UpgradeManager>().UpdateViews();
+                Destroy(gameObject);
+            });
         }
         
         private async void OnTriggerEnter2D(Collider2D other)

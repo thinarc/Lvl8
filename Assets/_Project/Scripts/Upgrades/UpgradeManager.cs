@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using Zenject;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.Upgrades
 {
@@ -20,12 +20,23 @@ namespace _Project.Scripts.Upgrades
                 view.transform.DOScale(0, 0);
             }
             
-            await UniTask.Delay(500);
-            UpdateViews();
+            transform.DOScale(0, 0f);
         }
 
-        private void UpdateViews()
+        public async void UpdateViews()
         {
+            Time.timeScale = 0f;
+            foreach (var other in views) other.GetComponent<Button>().interactable = true;
+            
+            try
+            {
+                transform.DOScale(1, 0.8f).SetEase(Ease.OutExpo).SetUpdate(true);
+            }
+            catch
+            {
+                // ignored
+            }
+
             var updates = GetRandomUpgrades(views.Length);
             var queue = new Queue<UpgradeData>();
             foreach (var u in updates) queue.Enqueue(u);
@@ -54,8 +65,25 @@ namespace _Project.Scripts.Upgrades
                 n.text = label;
                 d.text = desc;
 
-                view.transform.DOScale(0, 0);
-                view.transform.DOScale(1, 0.5f).SetDelay(i * 0.2f).SetEase(Ease.OutBack);
+                view.transform.DOScale(0, 0).SetUpdate(true);
+                view.transform.DOScale(1, 0.5f).SetDelay(i * 0.2f).SetEase(Ease.OutBack).SetUpdate(true);
+
+                view.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    view.DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
+                    foreach (var other in views)
+                    {
+                        other.GetComponent<Button>().onClick.RemoveAllListeners();
+                        other.GetComponent<Button>().interactable = false;
+                        if (other != view)
+                            other.DOScale(0, 0.4f * Random.Range(0.8f, 1.5f)).SetEase(Ease.InBack).SetUpdate(true);
+                    }
+                    
+                    transform.DOScale(0, 0.65f).SetEase(Ease.InExpo).SetUpdate(true);
+                    Time.timeScale = 1f;
+                    
+                    ApplyUpgrade(update);
+                });
             }
         }
 
@@ -74,9 +102,21 @@ namespace _Project.Scripts.Upgrades
             return result;
         }
 
-        public void ApplyUpgrade(UpgradeData upgrade, IUpgradeTarget target)
+        public void ApplyUpgrade(UpgradeData upgrade)
         {
-            target.ApplyUpgrade(upgrade);
+            var all = FindObjectsByType<MonoBehaviour>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            var targets = new List<IUpgradeTarget>();
+            foreach (var mb in all)
+            {
+                if (mb is IUpgradeTarget target)
+                    targets.Add(target);
+            }
+            
+            foreach (var target in targets)
+                target.ApplyUpgrade(upgrade);
         }
     }
 }

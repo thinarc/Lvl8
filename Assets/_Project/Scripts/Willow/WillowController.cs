@@ -36,10 +36,18 @@ namespace _Project.Scripts.Willow
             GrowUpWillow();
             print("Day has started - Willow grows.");
         }
+
+        private void ThrowGlitter()
+        {
+            var glitter = Resources.Load<GameObject>("Glitter");
+            Instantiate(glitter, _core.transform.position + new Vector3(1.45f * Random.Range(-1f, 1f), 1), Quaternion.identity);
+        }
         
         private void GrowUpWillow()
         {
             if (_currentStage >= stages.Length - 1) return;
+            if (_currentStage is 2 or 4) ThrowGlitter();
+            ThrowGlitter();
             
             foreach (var stage in stages)
                 if (stage) stage.SetActive(false);

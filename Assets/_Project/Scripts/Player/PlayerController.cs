@@ -41,7 +41,7 @@ namespace _Project.Scripts.Player
         {
             _frameInput = new FrameInput
             {
-                FlyHeld = UnityEngine.Input.GetButton("Jump") || UnityEngine.Input.GetKey(KeyCode.C),
+                FlyHeld = UnityEngine.Input.GetButton("Jump"),
                 Move = new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical"))
             };
 

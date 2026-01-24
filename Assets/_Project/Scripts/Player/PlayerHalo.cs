@@ -1,10 +1,11 @@
+using _Project.Scripts.Upgrades;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace _Project.Scripts.Player
 {
-    public class PlayerHalo : MonoBehaviour
+    public class PlayerHalo : MonoBehaviour, IUpgradeTarget
     {
         [SerializeField] private ScriptableHalo stats;
         private Light2D _haloLight;
@@ -25,6 +26,13 @@ namespace _Project.Scripts.Player
         private float _healthDelay;
         private float _healthTimer;
 
+        private bool _splashed;
+        private float _startRad;
+        
+        private float _dmgMultiplier = 1f;
+        private float _splashMulti = 1f;
+        private float _attDelay;
+
         private void Start()
         {
             _haloLight = GetComponent<Light2D>();
@@ -32,7 +40,40 @@ namespace _Project.Scripts.Player
             _glowIntensity = _haloLight.intensity;
             _glowRadius = _haloLight.pointLightOuterRadius;
             
+            _startRad = GetComponent<CircleCollider2D>().radius;
+
+            _splashMulti = stats.splashMultiplier;
+            _attDelay = stats.haloDelay;
+            
             _time = Random.Range(0f, 1000f);
+        }
+
+
+        public void ApplyUpgrade(UpgradeData upgrade)
+        {
+            if (upgrade.type == UpgradeType.HaloRadius)
+            {
+                _glowRadius *= upgrade.value;
+                _startRad *= upgrade.value;
+                GetComponent<CircleCollider2D>().radius *= upgrade.value;
+                speedPulse += 0.1f;
+            }
+
+            if (upgrade.type == UpgradeType.HaloPower)
+            {
+                _dmgMultiplier *= upgrade.value;
+                speedPulse += 0.1f;
+            }
+
+            if (upgrade.type == UpgradeType.SplashMultiplier)
+            {
+                _splashMulti *= upgrade.value;
+            }
+
+            if (upgrade.type == UpgradeType.HaloCooldown)
+            {
+                _attDelay /= upgrade.value;
+            }
         }
 
         private void Update()
@@ -43,8 +84,24 @@ namespace _Project.Scripts.Player
             if (_inAttack) return;
             _haloLight.intensity = _glowIntensity;
             _haloLight.pointLightOuterRadius = _glowRadius;
+            if (_splashed)
+            {
+                _haloLight.intensity *= (stats.splashMultiplier / 2);
+                _haloLight.pointLightOuterRadius *= (stats.splashMultiplier / 2);
+            }
             LightPulse.GetPulse(_haloLight, _haloLight.intensity, _haloLight.pointLightOuterRadius, _time, intensityAmp, radiusAmp);
             _time += Time.deltaTime * speedPulse;
+
+            if (UnityEngine.Input.GetKey(KeyCode.F))
+            {
+                GetComponent<CircleCollider2D>().radius = _startRad * (stats.splashMultiplier / 2);
+                _splashed = true;
+            }
+            else
+            {
+                GetComponent<CircleCollider2D>().radius = _startRad;
+                _splashed = false;
+            }
         }
     
         private void OnTriggerStay2D(Collider2D other)
@@ -67,17 +124,18 @@ namespace _Project.Scripts.Player
             if (!willowCore.CanGiveHeal()) return;
             
             willowCore.GetHealForm(out var haloHeal, out var haloHealDelay);
-            _haloReserve.AddReserve(haloHeal);
+            _haloReserve.AddReserve(haloHeal, true);
             _healthTimer = haloHealDelay;
         }
 
         private async void DoAttack(Collider2D bugCollider)
         {
             var bugCore = bugCollider.GetComponent<Bug.BugCorePart>();
-            if (!_haloReserve.TrySpendReserve(stats.haloDamage)) return;
-            var dmg = stats.haloDamage;
+            var dmg = stats.haloDamage * _dmgMultiplier;
+            if (_splashed) dmg *= _splashMulti;
+            if (!_haloReserve.TrySpendReserve(dmg)) return;
             bugCore.TakeDamage(dmg);
-            _attackTimer = stats.haloDelay;
+            _attackTimer = _attDelay;
 
             _inAttack = true;
             var prev = _haloLight.intensity;

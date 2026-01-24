@@ -1,9 +1,10 @@
+using _Project.Scripts.Upgrades;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Player
 {
-    public class HaloReserve : MonoBehaviour
+    public class HaloReserve : MonoBehaviour, IUpgradeTarget
     {
         [SerializeField] private float maxReserve = 100f;
         [SerializeField] private float idleRechargeRate;
@@ -13,12 +14,33 @@ namespace _Project.Scripts.Player
         private float _currentReserve;
         private float _currentAnimReserve;
 
+        private float _willowMulti = 1f;
+
         private void Start()
         {
             _reserveSlider = GetComponent<Slider>();
             _reserveSlider.maxValue = maxReserve;
             
             _currentReserve = 0f;
+        }
+        
+        public void ApplyUpgrade(UpgradeData upgrade)
+        {
+            if (upgrade.type == UpgradeType.ReserveMax)
+            {
+                maxReserve *= upgrade.value;
+                _reserveSlider.maxValue = maxReserve;
+            }
+            
+            if (upgrade.type == UpgradeType.IdleRechargeRate)
+            {
+                idleRechargeRate *= upgrade.value;
+            }
+            
+            if (upgrade.type == UpgradeType.RechargeFromWillowMulti)
+            {
+                _willowMulti *= upgrade.value;
+            }
         }
 
         private void Update()
@@ -37,8 +59,9 @@ namespace _Project.Scripts.Player
             return true;
         }
         
-        public void AddReserve(float amount)
+        public void AddReserve(float amount, bool fromWillow = false)
         {
+            if (fromWillow) amount *= _willowMulti;
             _currentReserve += amount;
             if (_currentReserve > maxReserve) _currentReserve = maxReserve;
         }

@@ -12,7 +12,7 @@ namespace _Project.Scripts.HUD
         [SerializeField] private bool skip;
         
         private bool _notSelected = true;
-        private bool _pressed = false;
+        private bool _pressed;
         
         public static string LocalLang = "en";
         
@@ -34,12 +34,17 @@ namespace _Project.Scripts.HUD
             }
             
             await UniTask.WaitUntil(() => _pressed);
+            await UniTask.Delay(400);
+            panel1.blocksRaycasts = false;
+            panel2.blocksRaycasts = false;
+            panel1.interactable = false;
+            panel2.interactable = false;
         }
 
         public void SelectButton(string lang)
         {
             LocalLang = lang;
-            print("Selected lang: " + lang);
+            _pressed = true;
 
             Time.timeScale = 1;
             panel1.DOFade(0, 0.3f).OnComplete(() => panel2.DOFade(0, 0.2f));
