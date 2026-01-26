@@ -46,6 +46,10 @@ namespace _Project.Scripts.HUD
             {
                 SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Night"));
             };
+            dayNightController.DayStarted += () =>
+            {
+                SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Day"));
+            };
         }
 
         private void Update()

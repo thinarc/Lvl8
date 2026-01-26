@@ -8600,7 +8600,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e6c529a4d344837459d61c8635d86c6d, type: 2}
   - {fileID: 11400000, guid: e037c14ad24ecc34d8244d350e661284, type: 2}
   - {fileID: 11400000, guid: 193b13dea4aa4004b8af931296c7c2d0, type: 2}
+  - {fileID: 11400000, guid: 193b13dea4aa4004b8af931296c7c2d0, type: 2}
   - {fileID: 11400000, guid: eb03738bb88d48d42afd5c1ea1b713ed, type: 2}
+  - {fileID: 11400000, guid: eb03738bb88d48d42afd5c1ea1b713ed, type: 2}
+  - {fileID: 11400000, guid: d13a09a0d6be48d4aa9552bd8230bd7e, type: 2}
   - {fileID: 11400000, guid: d13a09a0d6be48d4aa9552bd8230bd7e, type: 2}
   - {fileID: 11400000, guid: 124b09e9070e68b4cbd2b047661fa68e, type: 2}
   - {fileID: 11400000, guid: 9e5262f661f430f4ca6445e8f06307d6, type: 2}
@@ -16844,8 +16847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdaed5be6176e1e4ebfb725467feed3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDuration: 10
-  nightDuration: 20
+  dayDuration: 20
+  nightDuration: 40
   dayIntensity: 0.65
   nightIntensity: 0.112
   currentPhase: 0

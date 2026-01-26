@@ -86,6 +86,7 @@ namespace WaypointSystem {
             curve = GetComponent<ICurve>();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos() {
             Gizmos.color = pointColor;
             Handles.color = lineColor;
@@ -101,17 +102,22 @@ namespace WaypointSystem {
 
             DrawNormalPath();
         }
+#endif
 
+
+#if UNITY_EDITOR
         private void DrawNormalPath() {
 
             Handles.DrawAAPolyLine(lineSize, transform.position, next.transform.position); // 4f is thickness
             DrawArrow(transform.position, next.transform.position);
         }
+#endif
 
         private bool IsWaypointCurve() {
             return !(curve == null);
         }
 
+#if UNITY_EDITOR
         private void DrawArrow(Vector3 from, Vector3 to) {
             Vector3 direction = (to - from).normalized;
             Vector3 arrowTail = Vector3.Lerp(from, to, 0.9f);
@@ -124,7 +130,9 @@ namespace WaypointSystem {
 
 
         }
+#endif
 
+#if UNITY_EDITOR
         private void DrawCurve() {
 
 
@@ -140,6 +148,7 @@ namespace WaypointSystem {
             }
 
         }
+#endif
 
 
         void OnValidate() {
