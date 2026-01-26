@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 604c743ff4bb0bf4b8800a21b745b508
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3975071711169003521
+    second: willow2leaves3_0
+  - first:
+      213: 1719347496962289831
+    second: willow2leaves3_1
+  - first:
+      213: -1909195611989241624
+    second: willow2leaves3_2
+  - first:
+      213: -215916225798924242
+    second: willow2leaves3_3
+  - first:
+      213: 3217762739231699288
+    second: willow2leaves3_4
+  - first:
+      213: -4635635516263711242
+    second: willow2leaves3_5
+  - first:
+      213: 4603325647929340748
+    second: willow2leaves3_6
+  - first:
+      213: 5020009533442344425
+    second: willow2leaves3_7
+  - first:
+      213: 7412192101756763235
+    second: willow2leaves3_8
+  - first:
+      213: -2254409196664604340
+    second: willow2leaves3_9
+  - first:
+      213: 5103678446208341544
+    second: willow2leaves3_10
+  - first:
+      213: 1704868650099621817
+    second: willow2leaves3_11
+  - first:
+      213: 290602706648239530
+    second: willow2leaves3_12
+  - first:
+      213: 2047170186310383851
+    second: willow2leaves3_13
+  - first:
+      213: -7814330499386546650
+    second: willow2leaves3_14
+  - first:
+      213: 7350946524928908403
+    second: willow2leaves3_15
+  - first:
+      213: -1285520400623922042
+    second: willow2leaves3_16
+  - first:
+      213: 1321655288966941622
+    second: willow2leaves3_17
+  - first:
+      213: -3830801048657363398
+    second: willow2leaves3_18
+  - first:
+      213: -339602191833922880
+    second: willow2leaves3_19
+  - first:
+      213: -5580052766512799171
+    second: willow2leaves3_20
+  - first:
+      213: 7430803007660655681
+    second: willow2leaves3_21
+  - first:
+      213: -2937011936971498091
+    second: willow2leaves3_22
+  - first:
+      213: -3171587617357187871
+    second: willow2leaves3_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: willow2leaves3_0
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 1580
+        width: 196
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 100cee419aa4a2730800000000000000
+      internalID: 3975071711169003521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_1
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 1570
+        width: 45
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0f4e160795cd710800000000000000
+      internalID: 1719347496962289831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_2
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 1525
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e095acc4bc2185e0800000000000000
+      internalID: -1909195611989241624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_3
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 1571
+        width: 38
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e28130c2659e00df0800000000000000
+      internalID: -215916225798924242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_4
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 1398
+        width: 152
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 851b463b92ac7ac20800000000000000
+      internalID: 3217762739231699288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_5
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 396
+        width: 760
+        height: 1183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fdbae00f0aeaafb0800000000000000
+      internalID: -4635635516263711242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_6
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 1465
+        width: 44
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c43f54e894c42ef30800000000000000
+      internalID: 4603325647929340748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_7
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1242
+        width: 50
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e5c7e1d218aaa540800000000000000
+      internalID: 5020009533442344425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_8
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 996
+        width: 176
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36cfa20f1756dd660800000000000000
+      internalID: 7412192101756763235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_9
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 1317
+        width: 66
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49be6ea7cab6b0e0800000000000000
+      internalID: -2254409196664604340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_10
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 1167
+        width: 49
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826d012a188e3d640800000000000000
+      internalID: 5103678446208341544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_11
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 753
+        width: 107
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf33e52109e8a710800000000000000
+      internalID: 1704868650099621817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_12
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 811
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aad098c3f9d680400800000000000000
+      internalID: 290602706648239530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_13
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 550
+        width: 241
+        height: 533
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be8fcc52072096c10800000000000000
+      internalID: 2047170186310383851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_14
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 693
+        width: 66
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626609a10dbed8390800000000000000
+      internalID: -7814330499386546650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_15
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 720
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37c974ddaeec30660800000000000000
+      internalID: 7350946524928908403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_16
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 345
+        width: 126
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6841b41b10ae82ee0800000000000000
+      internalID: -1285520400623922042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_17
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 686
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bb046e9b76775210800000000000000
+      internalID: 1321655288966941622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_18
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 690
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3e75912eb246dac0800000000000000
+      internalID: -3830801048657363398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 383
+        width: 71
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c28bc61b9d794bf0800000000000000
+      internalID: -339602191833922880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 53
+        width: 411
+        height: 516
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32a110c29baf82b0800000000000000
+      internalID: -5580052766512799171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_21
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 255
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 144848327f38f1760800000000000000
+      internalID: 7430803007660655681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_22
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 206
+        width: 33
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59d5bbb4433ad37d0800000000000000
+      internalID: -2937011936971498091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: willow2leaves3_23
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 45
+        width: 40
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e4b565add14cf3d0800000000000000
+      internalID: -3171587617357187871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      willow2leaves3_0: 3975071711169003521
+      willow2leaves3_1: 1719347496962289831
+      willow2leaves3_10: 5103678446208341544
+      willow2leaves3_11: 1704868650099621817
+      willow2leaves3_12: 290602706648239530
+      willow2leaves3_13: 2047170186310383851
+      willow2leaves3_14: -7814330499386546650
+      willow2leaves3_15: 7350946524928908403
+      willow2leaves3_16: -1285520400623922042
+      willow2leaves3_17: 1321655288966941622
+      willow2leaves3_18: -3830801048657363398
+      willow2leaves3_19: -339602191833922880
+      willow2leaves3_2: -1909195611989241624
+      willow2leaves3_20: -5580052766512799171
+      willow2leaves3_21: 7430803007660655681
+      willow2leaves3_22: -2937011936971498091
+      willow2leaves3_23: -3171587617357187871
+      willow2leaves3_3: -215916225798924242
+      willow2leaves3_4: 3217762739231699288
+      willow2leaves3_5: -4635635516263711242
+      willow2leaves3_6: 4603325647929340748
+      willow2leaves3_7: 5020009533442344425
+      willow2leaves3_8: 7412192101756763235
+      willow2leaves3_9: -2254409196664604340
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

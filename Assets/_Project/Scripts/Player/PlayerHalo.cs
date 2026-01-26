@@ -56,6 +56,7 @@ namespace _Project.Scripts.Player
                 _glowRadius *= upgrade.value;
                 _startRad *= upgrade.value;
                 GetComponent<CircleCollider2D>().radius *= upgrade.value;
+                _glowIntensity *= upgrade.value / 1.6f;
                 speedPulse += 0.1f;
             }
 
@@ -87,7 +88,7 @@ namespace _Project.Scripts.Player
             if (_splashed)
             {
                 intensity *= (stats.splashMultiplier / 2);
-                rad *= (stats.splashMultiplier / 2);
+                rad /= (stats.splashMultiplier / 2);
             }
             _haloLight.intensity = Mathf.MoveTowards(_haloLight.intensity, intensity, Time.deltaTime * speedPulse);
             _haloLight.pointLightOuterRadius = Mathf.MoveTowards(_haloLight.pointLightOuterRadius, rad, Time.deltaTime * speedPulse);
@@ -108,8 +109,8 @@ namespace _Project.Scripts.Player
             if (_haloLight.intensity > 2.3f)
             {
                 Debug.Log("strange intensity " + _haloLight.intensity);
-                if (_glowIntensity > 2.3f) _glowIntensity = 2.3f;
-                _haloLight.intensity = 2.3f;
+                // if (_glowIntensity > 2.3f) _glowIntensity = 2.3f;
+                // _haloLight.intensity = 2.3f;
             }
         }
     
@@ -140,15 +141,17 @@ namespace _Project.Scripts.Player
         private async void DoAttack(Collider2D bugCollider)
         {
             var bugCore = bugCollider.GetComponent<Bug.BugCorePart>();
-            var dmg = stats.haloDamage * _dmgMultiplier;
-            if (_splashed) _attackTimer /= _splashMulti;
-            if (!_haloReserve.TrySpendReserve(dmg)) return;
-            bugCore.TakeDamage(dmg);
+            var dmgWithoutUpgrade = stats.haloDamage;
+            if (_splashed) dmgWithoutUpgrade *= stats.splashMultiplier;
+            var dmg = dmgWithoutUpgrade * _dmgMultiplier;
+            if (!_haloReserve.TrySpendReserve(dmgWithoutUpgrade)) return;
+            var retHealth = bugCore.TakeDamage(dmg);
+            _haloReserve.AddReserve(retHealth);
             _attackTimer = _attDelay;
 
             _inAttack = true;
             var prev = _haloLight.intensity;
-            _haloLight.intensity = prev * 2.7f;
+            _haloLight.intensity = prev * 3.1f;
             await UniTask.Delay(80);
             _haloLight.intensity = prev;
             _inAttack = false;

@@ -45,7 +45,7 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
-            AddReserve(idleRechargeRate / 100);
+            if (Time.timeScale != 0f) AddReserve(idleRechargeRate / 100);
             
             _currentAnimReserve = Mathf.MoveTowards(_currentAnimReserve, _currentReserve, Time.deltaTime * 50);
             _reserveSlider.value = _currentAnimReserve;

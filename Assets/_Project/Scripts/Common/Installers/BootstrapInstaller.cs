@@ -18,6 +18,7 @@ namespace _Project.Scripts.Common.Installers
             LangManager.LocalLang = "en";
             
             WillowController.Subscribed = false;
+            Stats.Sub = false;
             Container.BindInterfacesAndSelfTo<InputManager>().FromComponentInNewPrefab(inputManagerPrefab).AsSingle().NonLazy();
             Container.InstantiatePrefab(eventSystemPrefab);
             Container.BindInterfacesAndSelfTo<LangManager>().FromComponentInNewPrefab(langManagerPrefab).AsSingle().NonLazy();

@@ -19,15 +19,29 @@ namespace _Project.Scripts.Game
 
         private void Start()
         {
-            currentState = 0;
+            currentState--;
             
             _spawnTimer = 2f;
+            _currentBugs = 0;
+            
+            _dayNightController.NightStarted += OnNightStarted;
+        }
+
+        private void OnNightStarted()
+        {
+            currentState++;
             _currentBugs = 0;
         }
 
         private void Update()
         {
             _spawnTimer -= Time.deltaTime;
+
+            if (currentState == 6)
+            {
+                currentState = 5;
+                print("Win condition reached");
+            }
 
             if (!(_spawnTimer <= 0f) || _dayNightController.currentPhase == DayNightController.DayPhase.Day) return;
             if (_currentBugs >= spawnStats[currentState].maxBugs) return;

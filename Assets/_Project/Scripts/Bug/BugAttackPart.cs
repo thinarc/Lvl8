@@ -33,8 +33,10 @@ namespace _Project.Scripts.Bug
 
             if (_agent) _agent.pathToFollow = null;
             
-            transform.localScale *= Random.Range(1f, 2f);
-            if (_agent) _agent.speed *= Random.Range(0.8f, 1.3f);
+            var randNum = Random.Range(1.1f, 2.1f);
+            transform.localScale *= randNum / 1.4f;
+            if (_core) _core.TakeHp((_core.StartHp * randNum - _core.StartHp) / 2);
+            if (_agent) _agent.speed *= Random.Range(0.8f, 2f);
         }
 
         private void OnWillowReady()

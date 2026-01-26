@@ -14,7 +14,7 @@ namespace _Project.Scripts.HUD
         private bool _notSelected = true;
         private bool _pressed;
         
-        public static string LocalLang = "en";
+        public static string LocalLang;
         
         public async UniTask SelectLang()
         {
@@ -29,7 +29,8 @@ namespace _Project.Scripts.HUD
             {
                 await UniTask.Delay(100);
                 Time.timeScale = 0;
-                panel1.DOFade(1, 0.3f).OnComplete(() => panel2.DOFade(1, 0.2f)).SetUpdate(true);
+                panel2.DOFade(1, 0.3f).SetUpdate(true);
+                panel1.DOFade(1, 0.2f).SetUpdate(true);
                 panel1.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
             }
             
@@ -47,7 +48,8 @@ namespace _Project.Scripts.HUD
             _pressed = true;
 
             Time.timeScale = 1;
-            panel1.DOFade(0, 0.3f).OnComplete(() => panel2.DOFade(0, 0.2f));
+            panel2.DOFade(0, 0.3f);
+            panel1.DOFade(0, 0.2f);
             panel1.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
         }
     }

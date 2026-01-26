@@ -1,58 +1,33 @@
-Easy Audio Cutter - User Manual
-Trim Tab
+Easy Audio Cutter - Help
 
-Trimming: Allows trimming a specific section of an audio clip by adjusting Start and End sliders.
+**Trim Tab**
+• Allows trimming a specific section with fade in/out effects.
+• Offers preview and save options to test and export your edits.
+• Supports adjustable start and end times for precise trimming of audio clips.
+• Fade in/out durations can be customized to create smooth transitions.
+• Waveform visualization updates in real-time as you adjust trim or fade settings.
+• Tip: Use the curve editor to fine-tune fade effects for creative control.
 
-Fades: Fade In and Fade Out durations can be customized to create smooth transitions. You can fine-tune the fade shapes using the Animation Curve fields.
+**Merge Tab**
+• Combines multiple audio files into a single clip.
+• All audio files must have the same format (e.g., same sample rate and channels) to ensure compatibility.
+• Provides preview functionality for merged audio before saving.
+• Add or remove clips dynamically using the '+' and 'X' buttons.
+• Tip: Verify audio formats beforehand to avoid errors during merging.
 
-Reverse Audio: Toggle this option to reverse the selected audio section (great for SFX like rewinds or magic effects).
+**Adjust Volume Tab**
+• Increases or decreases the volume of selected audio files.
+• Use -1 to 1 range: negative values decrease volume, positive values increase it, and 0 leaves it unchanged.
+• Allows real-time preview of volume adjustments to hear changes instantly.
+• Saves modified clips with a '_Adjusted' suffix to preserve original files.
+• Tip: Avoid setting values close to -1 or 1 to prevent audio clipping or excessive reduction.
+• Supports multiple clips for batch volume adjustment.
 
-Waveform Seeking: Click anywhere on the waveform visualization to instantly jump (seek) to that time during preview.
-
-Real-time Update: The waveform updates in real-time as you adjust trim, fade, or reverse settings.
-
-Merge Tab
-
-Combine Clips: Combines multiple audio files into a single continuous clip.
-
-Reorder: Use the '↑' and '↓' buttons next to each clip to change their order in the sequence.
-
-Format Requirement: All audio files added to the list must have the same format (same sample rate and channel count) to ensure compatibility.
-
-Preview: You can listen to the entire merged sequence before saving.
-
-Adjust Volume Tab
-
-Volume Control: Increases or decreases the volume of a single selected audio file.
-
-Range: Use the slider range from -1 to 1. Negative values decrease volume, positive values increase it.
-
-Safety: The tool automatically clamps values to prevent audio clipping (distortion).
-
-Output: Saves the modified clip with an _Adjusted suffix to preserve the original file.
-
-General Features & Controls
-
-Shortcuts:
-
-Inspector: Click the ✂ (Scissor) icon in the AudioClip Inspector's preview bar.
-
-Project View: Right-click on any Audio Asset -> Easy Audio Cutter.
-
-Component: Right-click the AudioClip component title -> Easy Audio Cutter.
-
-Preview Volume: A global slider at the top allows you to adjust the volume of the editor's preview player without affecting the actual file.
-
-Undo/Redo: Full support (Ctrl+Z / Ctrl+Y) for all slider adjustments, toggles, and list operations.
-
-Waveform: Includes a red Playhead line to track playback position visually.
-
-Output Format: All processed audio files are exported in WAV format for maximum compatibility.
-
-Notes
-
-Requires an AudioClip to be assigned before performing operations.
-
-Preview audio is temporary and cleared from memory when the window is closed.
-
-For best results, use high-quality source files.
+**General Information**
+• Saves all processed audio in WAV format for broad compatibility.
+• Curve fields in the Trim tab determine the shape and smoothness of fade transitions.
+• Compatible with Unity's audio system for seamless integration into your projects.
+• Developed and updated as of July 05, 2025, at 02:04 PM +03.
+• Requires an AudioClip to be assigned before performing any operations.
+• Note: Preview audio is temporary and cleared when the window is closed.
+• For best results, use high-quality audio files and test previews before saving.

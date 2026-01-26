@@ -28,12 +28,18 @@ namespace _Project.Scripts.Willow
         [Inject] private DayNightController _dayNightController;
         private bool _died;
         private float _time;
+
+        public static bool Died;
         
         public float CurrentHp => hp;
+        public float MaxHp => startHp;
         public event Action OnDied;
         
         private void Start()
         {
+            _died = false;
+            Died = false;
+            
             hp = startHp;
             _animHp = hp;
             
@@ -44,6 +50,7 @@ namespace _Project.Scripts.Willow
             _time = Random.Range(0f, 1000f);
 
             _stGlowRadius = _glowRadius;
+            _stGlowIntensity = _glowIntensity;
             _stSpeedPulse = speedPulse;
             _radiusCollider = GetComponent<CircleCollider2D>().radius;
         }
@@ -60,6 +67,7 @@ namespace _Project.Scripts.Willow
         }
         
         private float _stGlowRadius;
+        private float _stGlowIntensity;
         private float _stSpeedPulse;
         private float _radiusCollider;
         public void UpdateCore(Transform corePos, float newStartHp, float glowModifier, BranchCore[] newBranches, WillowForm newForm)
@@ -71,6 +79,7 @@ namespace _Project.Scripts.Willow
             hp += diff;
             
             _glowRadius = _stGlowRadius * glowModifier;
+            if (glowModifier / 4 > 1) _glowIntensity = _stGlowIntensity * glowModifier / 4f;
             speedPulse = _stSpeedPulse * glowModifier / 2;
             GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier;
             
@@ -88,7 +97,7 @@ namespace _Project.Scripts.Willow
 
         public bool CanGiveHeal()
         {
-            return !_died && _dayNightController.currentPhase == DayNightController.DayPhase.Day;
+            return !_died && _dayNightController.currentPhase == DayNightController.DayPhase.Day && Time.timeScale != 0f;
         }
         
         public event Action ReadyToReceiveBranches;
@@ -103,7 +112,7 @@ namespace _Project.Scripts.Willow
             return branches.Length > 0;
         }
         
-        public bool CanTakeDamage() => !_died;
+        public bool CanTakeDamage() => !_died && Time.timeScale != 0f;
     
         public void TakeDamage(float damage)
         {
@@ -112,6 +121,7 @@ namespace _Project.Scripts.Willow
 
             if (!(hp <= 0) || _died) return;
             _died = true;
+            Died = true;
             OnDied?.Invoke();
             print("Willow has died.");
         }

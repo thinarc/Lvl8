@@ -12,6 +12,8 @@ namespace _Project.Scripts.Bug
         private float _animHp;
         private float _expandedHp;
         
+        public float StartHp => startHp;
+        
         [SerializeField, Space(5)] private float intensityAmp = 0.3f;
         [SerializeField] private float radiusAmp = 0.4f;
         [SerializeField] private float speedPulse = 1.5f;
@@ -45,23 +47,35 @@ namespace _Project.Scripts.Bug
             _time += Time.deltaTime * speedPulse;
         }
     
-        public async void TakeDamage(float damage)
+        public float TakeDamage(float damage)
         {
             if (hp - damage > 0)
             {
                 hp -= damage;
                 var color1 = _glow.color;
                 var color2 = GetComponentInChildren<SpriteRenderer>().color;
-                _glow.color = Color.yellow / 1.4f;
-                GetComponentInChildren<SpriteRenderer>().color = Color.red / 1.4f;
-                await UniTask.Delay(100);
-                _glow.color = color1;
-                GetComponentInChildren<SpriteRenderer>().color = color2;
+                var newColor1 = Color.red / 1.6f;
+                var newColor2 = Color.red / 3f;
+                newColor1.a = color1.a;
+                newColor2.a = color2.a;
+                _glow.color = newColor1;
+                GetComponentInChildren<SpriteRenderer>().color = newColor2;
+                RetColor(color1, color2);
+                var scale = transform.localScale;
+                transform.DOScale(scale * 1.24f, 0.2f).SetEase(Ease.Linear).OnComplete(() => transform.DOScale(scale, 0.1f));
+                return 0;
             }
-            else hp = 0;
-
-            if (!(hp <= 0)) return;
+            var retHp = (hp - damage) * -1;
+            hp = 0;
             transform.DOScale(0, 0.5f).SetEase(Ease.Linear).OnComplete(() => Destroy(gameObject));
+            return retHp;
+        }
+
+        private async void RetColor(Color color1, Color color2)
+        {
+            await UniTask.Delay(100);
+            _glow.color = color1;
+            GetComponentInChildren<SpriteRenderer>().color = color2;
         }
         
         public void TakeHp(float hpToAdd)

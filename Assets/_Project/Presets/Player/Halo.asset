@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8235894766744db83b93ba6b79eb5aa, type: 3}
   m_Name: Halo
   m_EditorClassIdentifier: 
-  haloDamage: 2
-  haloDelay: 0.1
+  haloDamage: 6.5
+  haloDelay: 0.28
   splashMultiplier: 3.4

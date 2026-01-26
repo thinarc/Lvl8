@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using _Project.Scripts.HUD;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -71,6 +70,7 @@ namespace _Project.Scripts.Upgrades
 
                 view.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    
                     foreach (var vd in views)
                     {
                         vd.GetComponent<HoverZoomTrigger>().enabled = false;
