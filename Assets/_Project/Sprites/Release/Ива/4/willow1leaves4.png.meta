@@ -121,7 +121,7 @@ TextureImporter:
         width: 1152
         height: 1351
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,11 +134,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: willow1leaves4_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1196
+        height: 1750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb9ef96224c8c12478dd5a4998be4766
+      internalID: 1179546110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c2577b57b13b143418e1c6b0113fd34b
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +171,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       willow1leaves4_0: -2997842645586791529
+      willow1leaves4_1: 1179546110
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -97,7 +97,7 @@ namespace _Project.Scripts.Player
 
             if (UnityEngine.Input.GetKey(KeyCode.F))
             {
-                GetComponent<CircleCollider2D>().radius = _startRad * (stats.splashMultiplier / 2);
+                GetComponent<CircleCollider2D>().radius = _startRad / (stats.splashMultiplier / 2);
                 _splashed = true;
             }
             else

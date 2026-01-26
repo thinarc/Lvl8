@@ -77,3 +77,4 @@ MonoBehaviour:
   inputManagerPrefab: {fileID: 2413229989432000956, guid: 3f6757e5f587e3e4cb8b4cde4d81b019, type: 3}
   eventSystemPrefab: {fileID: 5191470153882868118, guid: 47292176310a6e9469a308319df613ea, type: 3}
   langManagerPrefab: {fileID: 852200073703386990, guid: e3c1e071e0c465140b2b36fed8aab52b, type: 3}
+  soundManagerPrefab: {fileID: 7106009609562269263, guid: da6bb758b8e9ca640a9ffb3021ba9839, type: 3}

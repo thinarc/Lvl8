@@ -30,9 +30,18 @@ namespace _Project.Scripts.Game
         private float _targetIntensity;
         private float _storyDelayTimer;
 
-        private void Start()
+        private async void Start()
         {
-            if (LangManager.LocalLang == "ru") formatterLight.transform.localScale *= 1.08f;
+            await UniTask.Delay(600);
+            if (LangManager.LocalLang == "ru")
+            {
+                if (!formatterLight) return;
+                var scale = formatterLight.transform.localScale;
+                scale.x *= 1.02f;
+                formatterLight.transform.localScale = scale;
+            }
+            
+            if (!formatterLight) return;
             
             _startLightScale = formatterLight.transform.localScale;
             _startLightIntensity = 0.2f;

@@ -1,4 +1,5 @@
 using _Project.Scripts.Upgrades;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ namespace _Project.Scripts.Player
         [SerializeField] private float idleRechargeRate;
         
         private Slider _reserveSlider;
+        [SerializeField, Space(5)] private Image reserveFill;
+        [SerializeField] private Color oldColor;
+        [SerializeField] private Color blinkColor;
+        [SerializeField] private Color dmgColor;
         
         private float _currentReserve;
         private float _currentAnimReserve;
@@ -50,11 +55,28 @@ namespace _Project.Scripts.Player
             _currentAnimReserve = Mathf.MoveTowards(_currentAnimReserve, _currentReserve, Time.deltaTime * 50);
             _reserveSlider.value = _currentAnimReserve;
         }
-        
+
+        private Tween _fiil;
+        private Tween _fill2;
         public bool TrySpendReserve(float amount)
         {
-            if (_currentReserve - amount < 0) return false;
+            if (_currentReserve - amount < 0)
+            {
+                if (_fiil != null) _fiil.Kill();
+                _fiil = reserveFill.DOColor(blinkColor, 0f).SetEase(Ease.InBack).OnComplete(() =>
+                {
+                    if (_fill2 != null) _fill2.Kill();
+                    _fill2 = reserveFill.DOColor(oldColor, 0.6f).SetEase(Ease.OutBack).OnComplete(() => _fiil.Kill());
+                });
+                return false;
+            }
             _currentReserve -= amount;
+            if (_fiil != null) _fiil.Kill();
+            _fiil = reserveFill.DOColor(dmgColor, 0f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                if (_fill2 != null) _fill2.Kill();
+                _fill2 = reserveFill.DOColor(oldColor, 0.6f).SetEase(Ease.OutBack).OnComplete(() => _fiil.Kill());
+            });
             if (_currentReserve < 0) _currentReserve = 0;
             return true;
         }

@@ -34,6 +34,7 @@ namespace _Project.Scripts.Willow
         public float CurrentHp => hp;
         public float MaxHp => startHp;
         public event Action OnDied;
+        public event Action OnGrew;
         
         private void Start()
         {
@@ -53,6 +54,7 @@ namespace _Project.Scripts.Willow
             _stGlowIntensity = _glowIntensity;
             _stSpeedPulse = speedPulse;
             _radiusCollider = GetComponent<CircleCollider2D>().radius;
+            _startScale = transform.localScale;
         }
 
         private void Update()
@@ -70,6 +72,7 @@ namespace _Project.Scripts.Willow
         private float _stGlowIntensity;
         private float _stSpeedPulse;
         private float _radiusCollider;
+        private Vector3 _startScale;
         public void UpdateCore(Transform corePos, float newStartHp, float glowModifier, BranchCore[] newBranches, WillowForm newForm)
         {
             transform.position = corePos.position;
@@ -80,13 +83,46 @@ namespace _Project.Scripts.Willow
             
             _glowRadius = _stGlowRadius * glowModifier;
             if (glowModifier / 4 > 1) _glowIntensity = _stGlowIntensity * glowModifier / 4f;
+            if (glowModifier < 3.4f)
+            {
+                transform.localScale = _startScale * glowModifier / 1.6f;
+            }
+            else if (glowModifier < 4f)
+            {
+                transform.localScale = _startScale * glowModifier / 1.8f;
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                transform.localScale = _startScale * glowModifier / 1.6f;
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
+            }
             speedPulse = _stSpeedPulse * glowModifier / 2;
-            GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier;
+            if (glowModifier >= 4f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 5f;
+            else if (glowModifier >= 3.4f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 3.3f;
+            else if (glowModifier >= 2.8f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 2.1f;
+            else if (glowModifier > 1f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 1.48f;
             
             branches = newBranches;
-            ReadyToReceiveBranches?.Invoke();
-
             form = newForm;
+            
+            ReadyToReceiveBranches?.Invoke();
+        }
+        
+        public void CallGrew()
+        {
+            OnGrew?.Invoke();
+        }
+
+        public float GetBugMultiplier()
+        {
+            return form.bugMultiplier;
+        }
+        
+        public int GetCamLens()
+        {
+            if (form == null) return 0;
+            return form.camLens + 1;
         }
         
         public void GetHealForm(out float health, out float healDelay)
@@ -123,7 +159,6 @@ namespace _Project.Scripts.Willow
             _died = true;
             Died = true;
             OnDied?.Invoke();
-            print("Willow has died.");
         }
     }
 }

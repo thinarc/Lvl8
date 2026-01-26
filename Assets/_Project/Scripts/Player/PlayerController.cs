@@ -24,6 +24,8 @@ namespace _Project.Scripts.Player
 
         private float _time;
 
+        private bool _sitdown = true;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -53,6 +55,8 @@ namespace _Project.Scripts.Player
             }
 
             _flyToConsume = _frameInput.FlyHeld;
+
+            if (_frameInput.FlyHeld || _frameInput.Move.x != 0 || _frameInput.Move.y != 0) _sitdown = false;
         }
 
         private void FixedUpdate()
@@ -152,7 +156,13 @@ namespace _Project.Scripts.Player
 
         #endregion
 
-        private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
+        private void ApplyMovement()
+        {
+            _rb.linearVelocity = _frameVelocity;
+            if (_sitdown)
+                _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            else _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     public struct FrameInput

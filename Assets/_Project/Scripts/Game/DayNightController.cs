@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Zenject;
 
 namespace _Project.Scripts.Game
 {
@@ -23,8 +24,14 @@ namespace _Project.Scripts.Game
         public event Action NightStarted;
         public event Action PhaseChanged;
 
+        public event Action BeforeDayStarted;
+
+        public event Action Pass;
+
         private Light2D _global;
         public SpriteRenderer fog;
+
+        [Inject] private SoundManager _sound;
         
         private async void Start()
         {
@@ -33,19 +40,28 @@ namespace _Project.Scripts.Game
             _timer = 1f;
             
             await UniTask.NextFrame();
+            await UniTask.NextFrame();
             StartDay();
         }
+
+        private bool _callBefore;
 
         private void Update()
         {
             _timer -= Time.deltaTime;
             if (_timer <= 0f) SwitchPhase();
+            
+            if (_timer < 2f && !_callBefore && currentPhase == DayPhase.Night)
+            {
+                _callBefore = true;
+                BeforeDayStarted?.Invoke();
+            }
 
             var duration = currentPhase == DayPhase.Day ? dayDuration : nightDuration;
-            if (_timer / duration > 0.4f) return;
+            if (_timer / duration > 0.55f) return;
             var targetIntensity = currentPhase == DayPhase.Day ? nightIntensity : dayIntensity;
             var step = Mathf.Abs(targetIntensity - _global.intensity) / (duration * 0.4f);
-            step *= 3f;
+            step *= 2.45f;
             _global.intensity = Mathf.MoveTowards(_global.intensity, targetIntensity, step * Time.deltaTime);
         }
 
@@ -57,17 +73,23 @@ namespace _Project.Scripts.Game
 
         private void StartDay()
         {
+            _callBefore = false;
             currentPhase = DayPhase.Day;
             _timer = dayDuration;
             DayStarted?.Invoke();
             PhaseChanged?.Invoke();
             
             _global.intensity = dayIntensity;
+            _sound.PlayDay();
         }
 
+        private int _nights;
         private void StartNight()
         {
             currentPhase = DayPhase.Night;
+            _nights++;
+            print(_nights);
+            if (_nights == 6) Pass?.Invoke();
             _timer = nightDuration;
             NightStarted?.Invoke();
             PhaseChanged?.Invoke();
@@ -77,6 +99,8 @@ namespace _Project.Scripts.Game
             {
                 fog.DOFade(0, 2.4f).SetEase(Ease.OutFlash);
             });
+            
+            _sound.PlayNight();
         }
     }
 }

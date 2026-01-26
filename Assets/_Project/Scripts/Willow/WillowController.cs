@@ -35,12 +35,13 @@ namespace _Project.Scripts.Willow
             startStage--;
             _currentStage = startStage;
 
-            if (!Subscribed)
+            if (Subscribed)
             {
                 Subscribed = true;
                 return;
             }
             _dayNightController.DayStarted += OnDayStarted;
+            _dayNightController.BeforeDayStarted += OnBeforeDay;
             _core.OnDied += OnWillowDied;
             Subscribed = false;
         }
@@ -49,13 +50,17 @@ namespace _Project.Scripts.Willow
         {
             if (_isDead) return;
             GrowUpWillow();
-            print("Day has started - Willow grows.");
         }
 
         private void ThrowGlitter()
         {
             var glitter = Resources.Load<GameObject>("Glitter");
-            Instantiate(glitter, _core.transform.position + new Vector3(2.2f * Random.Range(-1f, 1f), 1), Quaternion.identity);
+            Instantiate(glitter, _core.transform.position + new Vector3(2.6f * Random.Range(-1f, 1f), 1), Quaternion.identity);
+        }
+
+        private void OnBeforeDay()
+        {
+            _core.CallGrew();
         }
         
         private void GrowUpWillow()
@@ -69,8 +74,8 @@ namespace _Project.Scripts.Willow
                 {
                     if (stage.activeInHierarchy)
                     {
-                        stage.GetComponent<SpriteRenderer>().DOFade(0, 0.8f).SetEase(Ease.OutBack);
-                        _core.GetComponentInChildren<SpriteRenderer>().DOFade(0, 0.8f).SetEase(Ease.OutBack);
+                        stage.GetComponent<SpriteRenderer>().DOFade(0, 0.65f).SetEase(Ease.OutBack);
+                        _core.GetComponentInChildren<SpriteRenderer>().DOFade(0, 0f);
                     }
                     else
                     {
@@ -84,15 +89,38 @@ namespace _Project.Scripts.Willow
             }
             _currentStage += 1;
             stages[_currentStage].gameObject.SetActive(true);
-            stages[_currentStage].GetComponent<SpriteRenderer>().DOFade(1, 2f).SetEase(Ease.OutBack).OnComplete(ThrowGlitter);
-            _core.GetComponentInChildren<SpriteRenderer>().DOFade(1, 2f).SetEase(Ease.OutBack).SetDelay(0.8f);
+            var stageScale = stages[_currentStage].GetComponent<SpriteRenderer>().transform.localScale.x;
+            var stagePos = stages[_currentStage].GetComponent<SpriteRenderer>().transform.position;
+            if (_currentStage != 0)
+            {
+                stages[_currentStage].GetComponent<SpriteRenderer>().transform.DOScale(stages[_currentStage - 1].GetComponent<SpriteRenderer>().transform.localScale.x, 0f);
+                stages[_currentStage].GetComponent<SpriteRenderer>().transform.DOMove(stages[_currentStage - 1].GetComponent<SpriteRenderer>().transform.position, 0f);
+            }
+            stages[_currentStage].GetComponent<SpriteRenderer>().DOFade(1, 2f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                ThrowGlitter();
+                
+            });
+            stages[_currentStage].GetComponent<SpriteRenderer>().transform.DOScale(stageScale, 1.4f).SetEase(Ease.OutBack);
+            stages[_currentStage].GetComponent<SpriteRenderer>().transform.DOMove(stagePos, 1.4f).SetEase(Ease.OutBack);
+            _core.GetComponentInChildren<SpriteRenderer>().DOFade(1, 2f).SetEase(Ease.OutBack).SetDelay(0.4f);
             var corePos = stages[_currentStage].transform.Find("CorePoint");
             var branches = stages[_currentStage].GetComponentsInChildren<BranchCore>();
             _core.UpdateCore(corePos, forms[_currentStage].startHp, forms[_currentStage].glowModifier, branches, forms[_currentStage]);
         }
         
         private bool _isDead;
-        private void OnWillowDied() => _isDead = true;
+
+        private void OnWillowDied()
+        {
+            _core.GetComponentInChildren<SpriteRenderer>().DOFade(0, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
+            foreach (var stage in stages)
+            {
+                stage.GetComponent<SpriteRenderer>().DOFade(0, 0.65f).SetEase(Ease.OutBack).SetUpdate(true);
+                stage.transform.DOScale(0.5f, 2f).SetEase(Ease.OutBack).SetUpdate(true);
+            }
+            _isDead = true;
+        }
     }
     
     [System.Serializable]
@@ -102,5 +130,7 @@ namespace _Project.Scripts.Willow
         public float glowModifier = 1.3f;
         public float healthPlayer = 5f;
         public float healthPlayerDelay = 0.2f;
+        public float bugMultiplier = 1.3f;
+        public int camLens;
     }
 }

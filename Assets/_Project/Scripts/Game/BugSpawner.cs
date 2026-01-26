@@ -7,7 +7,7 @@ namespace _Project.Scripts.Game
 {
     public class BugSpawner : MonoBehaviour
     {
-        [Inject] private  BugFactory _factory;
+        [Inject] private BugFactory _factory;
         [SerializeField] private WillowCore core;
         [Inject] private DayNightController _dayNightController;
         
@@ -40,7 +40,7 @@ namespace _Project.Scripts.Game
             if (currentState == 6)
             {
                 currentState = 5;
-                print("Win condition reached");
+                print("CURRENT STATE == 6, YOU CHECK THE WIN CONDITION ON DAY?");
             }
 
             if (!(_spawnTimer <= 0f) || _dayNightController.currentPhase == DayNightController.DayPhase.Day) return;

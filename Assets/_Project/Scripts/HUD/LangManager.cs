@@ -18,6 +18,10 @@ namespace _Project.Scripts.HUD
         
         public async UniTask SelectLang()
         {
+            panel1.blocksRaycasts = false;
+            panel2.blocksRaycasts = false;
+            panel1.interactable = false;
+            panel2.interactable = false;
             panel1.DOFade(0, 0f);
             panel2.DOFade(0, 0f);
             panel1.transform.DOScale(0, 0f).SetEase(Ease.InBack);
@@ -27,6 +31,10 @@ namespace _Project.Scripts.HUD
             if (skip) _pressed = true;
             else
             {
+                panel1.blocksRaycasts = true;
+                panel2.blocksRaycasts = true;
+                panel1.interactable = true;
+                panel2.interactable = true;
                 await UniTask.Delay(100);
                 Time.timeScale = 0;
                 panel2.DOFade(1, 0.3f).SetUpdate(true);
@@ -48,8 +56,8 @@ namespace _Project.Scripts.HUD
             _pressed = true;
 
             Time.timeScale = 1;
-            panel2.DOFade(0, 0.3f);
-            panel1.DOFade(0, 0.2f);
+            panel2.DOFade(0, 0.4f);
+            panel1.DOFade(0, 0.3f);
             panel1.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
         }
     }

@@ -32,11 +32,6 @@ namespace _Project.Scripts.Bug
             _core = GetComponent(typeof(BugCorePart)) as BugCorePart;
 
             if (_agent) _agent.pathToFollow = null;
-            
-            var randNum = Random.Range(1.1f, 2.1f);
-            transform.localScale *= randNum / 1.4f;
-            if (_core) _core.TakeHp((_core.StartHp * randNum - _core.StartHp) / 2);
-            if (_agent) _agent.speed *= Random.Range(0.8f, 2f);
         }
 
         private void OnWillowReady()
@@ -44,6 +39,15 @@ namespace _Project.Scripts.Bug
             if (_agent) _agent.pathToFollow = _willowCore.GetRandomBranch();
             if (_agent) _agent.enabled = true;
             _prevPosition = transform.position;
+
+            transform.localScale *= _willowCore.GetBugMultiplier();
+            
+            var randNum = Random.Range(1.1f, 2.1f);
+            randNum *= _willowCore.GetBugMultiplier() / 2;
+            if (randNum < 0.85f) randNum = 0.85f;
+            transform.localScale *= randNum / 1.4f;
+            if (_core) _core.TakeHp((_core.StartHp * randNum - _core.StartHp) / 1.7f);
+            if (_agent) _agent.speed *= randNum;
         }
 
         private Vector3 _prevPosition;

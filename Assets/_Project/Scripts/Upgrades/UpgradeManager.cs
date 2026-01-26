@@ -87,6 +87,7 @@ namespace _Project.Scripts.Upgrades
                     
                     GetComponent<Image>().DOFade(0, 0.65f).SetEase(Ease.InExpo).SetUpdate(true);
                     Time.timeScale = 1f;
+                    SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Selection"));
                     
                     ApplyUpgrade(update);
                 });

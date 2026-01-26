@@ -22,21 +22,29 @@ namespace _Project.Scripts.HUD
         
         private bool _initialized;
         public static bool Sub;
+        private int c = 0;
 
         private void Start()
         {
             if (!Sub)
             {
                 Sub = true;
-                return;
+                // return;
             }
             dayNightController.PhaseChanged += () =>
             {
                 if (dayNightController.currentPhase == DayNightController.DayPhase.Night)
                     timerText.transform.parent.GetComponent<Image>().color = colorNight;
                 else timerText.transform.parent.GetComponent<Image>().color = colorDay;
+                print("binded Timer");
+                if (c != 0) SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Timer"));
+                c++;
                 timer.Play();
                 Sub = true;
+            };
+            dayNightController.NightStarted += () =>
+            {
+                SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Night"));
             };
         }
 
