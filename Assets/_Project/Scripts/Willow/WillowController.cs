@@ -66,7 +66,6 @@ namespace _Project.Scripts.Willow
         private void GrowUpWillow()
         {
             if (_currentStage >= stages.Length - 1) return;
-            if (_currentStage is 2 or 4) ThrowGlitter();
             
             foreach (var stage in stages)
             {
@@ -88,6 +87,7 @@ namespace _Project.Scripts.Willow
                 else return;
             }
             _currentStage += 1;
+            if (_currentStage is 1 or 3 or 5) ThrowGlitter();
             stages[_currentStage].gameObject.SetActive(true);
             var stageScale = stages[_currentStage].GetComponent<SpriteRenderer>().transform.localScale.x;
             var stagePos = stages[_currentStage].GetComponent<SpriteRenderer>().transform.position;

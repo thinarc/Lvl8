@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Zenject;
 
 namespace _Project.Scripts.Player
 {
@@ -18,7 +20,6 @@ namespace _Project.Scripts.Player
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
         public event Action Flew;
-        public bool FlyHeld => _frameInput.FlyHeld;
 
         #endregion
 
@@ -39,24 +40,54 @@ namespace _Project.Scripts.Player
             _time += Time.deltaTime;
             GatherInput();
         }
+        
+        private Vector3? _targetPosition;
 
         private void GatherInput()
         {
-            _frameInput = new FrameInput
-            {
-                FlyHeld = UnityEngine.Input.GetButton("Jump"),
-                Move = new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical"))
-            };
+            // Игнорируем клики по UI
+            bool isClick = UnityEngine.Input.GetKeyDown(KeyCode.Mouse0);
+            bool isOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 
-            if (stats.snapInput)
+            if (isClick && !isOverUI)
             {
-                _frameInput.Move.x = Mathf.Abs(_frameInput.Move.x) < stats.horizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.x);
-                _frameInput.Move.y = Mathf.Abs(_frameInput.Move.y) < stats.verticalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.y);
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+                mouseWorldPos.z = transform.position.z;
+
+                const float clickThreshold = 0.05f;
+
+                if (!_targetPosition.HasValue ||
+                    (mouseWorldPos - _targetPosition.Value).sqrMagnitude > clickThreshold * clickThreshold)
+                {
+                    _targetPosition = mouseWorldPos;
+                }
             }
 
-            _flyToConsume = _frameInput.FlyHeld;
+            Vector2 move = Vector2.zero;
 
-            if (_frameInput.FlyHeld || _frameInput.Move.x != 0 || _frameInput.Move.y != 0) _sitdown = false;
+            if (_targetPosition.HasValue)
+            {
+                Vector2 direction = _targetPosition.Value - transform.position;
+
+                const float stopDistance = 0.05f;
+
+                if (direction.sqrMagnitude <= stopDistance * stopDistance)
+                {
+                    _targetPosition = null;
+                }
+                else
+                {
+                    move = direction.normalized;
+                }
+            }
+
+            _frameInput = new FrameInput
+            {
+                Move = move
+            };
+
+            if (_frameInput.Move != Vector2.zero)
+                _sitdown = false;
         }
 
         private void FixedUpdate()
@@ -72,7 +103,6 @@ namespace _Project.Scripts.Player
 
         #region Collisions
         
-        private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
 
         private void CheckCollisions()
@@ -88,12 +118,10 @@ namespace _Project.Scripts.Player
             {
                 case false when groundHit:
                     _grounded = true;
-                    _flewInvoked = false;
                     GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
                     break;
                 case true when !groundHit:
                     _grounded = false;
-                    _frameLeftGrounded = _time;
                     GroundedChanged?.Invoke(false, 0);
                     break;
             }
@@ -106,17 +134,17 @@ namespace _Project.Scripts.Player
 
         #region Flying
 
-        private bool _flyToConsume;
-        private bool _flewInvoked;
-
         private void HandleFly()
         {
-            if (!_flyToConsume) return;
-
-            _frameVelocity.y = stats.flyPower;
-            if (_flewInvoked) return;
-            Flew?.Invoke();
-            _flewInvoked = true;
+            if (_frameInput.Move.y == 0)
+            {
+                var deceleration = !_grounded ? stats.groundDeceleration : stats.airDeceleration;
+                _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, 0, deceleration * Time.fixedDeltaTime);
+            }
+            else
+            {
+                _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, _frameInput.Move.y * stats.flyPower, stats.acceleration * Time.fixedDeltaTime);
+            }
         }
 
         #endregion
@@ -142,16 +170,17 @@ namespace _Project.Scripts.Player
 
         private void HandleGravity()
         {
-            if (_grounded && _frameVelocity.y <= 0f)
-            {
-                _frameVelocity.y = stats.groundingForce;
-            }
-            else
-            {
-                var inAirGravity = stats.fallAcceleration;
-                if (_frameVelocity.y > 0) inAirGravity *= stats.flyEndEarlyGravityModifier;
-                _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -stats.maxFallSpeed, inAirGravity * Time.fixedDeltaTime);
-            }
+            // if (_grounded && _frameVelocity.y <= 0f)
+            // {
+            //     print("f");
+            //     _frameVelocity.y = stats.groundingForce;
+            // }
+            // else
+            // {
+            //     var inAirGravity = stats.fallAcceleration;
+            //     if (_frameVelocity.y > 0) inAirGravity *= stats.flyEndEarlyGravityModifier;
+            //     _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -stats.maxFallSpeed, inAirGravity * Time.fixedDeltaTime);
+            // }
         }
 
         #endregion
@@ -167,7 +196,6 @@ namespace _Project.Scripts.Player
 
     public struct FrameInput
     {
-        public bool FlyHeld;
         public Vector2 Move;
     }
 
@@ -177,6 +205,5 @@ namespace _Project.Scripts.Player
 
         public event Action Flew;
         public Vector2 FrameInput { get; }
-        public bool FlyHeld { get; }
     }
 }

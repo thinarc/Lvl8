@@ -18,16 +18,16 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  snapInput: 1
-  horizontalDeadZoneThreshold: 0.1
+  snapInput: 0
+  horizontalDeadZoneThreshold: 0.2
   verticalDeadZoneThreshold: 0.2
-  maxSpeed: 6
+  maxSpeed: 4
   acceleration: 120
   groundDeceleration: 60
   airDeceleration: 30
   groundingForce: -1.5
   grounderDistance: 0.05
-  flyPower: 18
-  maxFallSpeed: 4.2
-  fallAcceleration: 140
+  flyPower: 4
+  maxFallSpeed: 3.9
+  fallAcceleration: 124
   flyEndEarlyGravityModifier: 4

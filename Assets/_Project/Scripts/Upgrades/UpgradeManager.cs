@@ -20,12 +20,14 @@ namespace _Project.Scripts.Upgrades
             }
             
             GetComponent<CanvasGroup>().alpha = 1f;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
             GetComponent<Image>().DOFade(0, 0f);
         }
 
         public void UpdateViews()
         {
             Time.timeScale = 0f;
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
             foreach (var other in views) other.GetComponent<Button>().interactable = true;
             
             try
@@ -87,6 +89,7 @@ namespace _Project.Scripts.Upgrades
                     
                     GetComponent<Image>().DOFade(0, 0.65f).SetEase(Ease.InExpo).SetUpdate(true);
                     Time.timeScale = 1f;
+                    GetComponent<CanvasGroup>().blocksRaycasts = false;
                     SoundManager.instance.PlaySfx(Resources.Load<AudioClip>("Selection"));
                     
                     ApplyUpgrade(update);
@@ -94,16 +97,27 @@ namespace _Project.Scripts.Upgrades
             }
         }
 
-        public List<UpgradeData> GetRandomUpgrades(int count)
+        private List<UpgradeData> GetRandomUpgrades(int count)
         {
             var pool = new List<UpgradeData>(allUpgrades);
-            List<UpgradeData> result = new();
+            var result = new List<UpgradeData>();
+            var usedDesc = new HashSet<string>();
 
-            for (var i = 0; i < count && pool.Count > 0; i++)
+            while (result.Count < count)
             {
                 var index = Random.Range(0, pool.Count);
-                result.Add(pool[index]);
-                pool.RemoveAt(index);
+                var selected = pool[index];
+
+                if (usedDesc.Contains(selected.descEn))
+                {
+                    pool.RemoveAt(index);
+                    continue;
+                }
+
+                result.Add(selected);
+                usedDesc.Add(selected.descEn);
+                
+                pool.RemoveAll(u => u.descEn == selected.descEn);
             }
 
             return result;

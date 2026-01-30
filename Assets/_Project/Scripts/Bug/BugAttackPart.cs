@@ -44,6 +44,7 @@ namespace _Project.Scripts.Bug
             
             var randNum = Random.Range(1.1f, 2.1f);
             randNum *= _willowCore.GetBugMultiplier() / 2;
+            damage *= randNum / 1.67f;
             if (randNum < 0.85f) randNum = 0.85f;
             transform.localScale *= randNum / 1.4f;
             if (_core) _core.TakeHp((_core.StartHp * randNum - _core.StartHp) / 1.7f);
@@ -89,6 +90,7 @@ namespace _Project.Scripts.Bug
         private void AttackWillow()
         {
             if (!_attackWillow || !_willowCore.CanTakeDamage()) return;
+            if (_core.died) return;
             _attackTimer -= Time.deltaTime;
 
             if (!(_attackTimer <= 0)) return;

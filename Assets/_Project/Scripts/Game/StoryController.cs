@@ -7,6 +7,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Zenject;
 
 namespace _Project.Scripts.Game
 {
@@ -29,6 +30,8 @@ namespace _Project.Scripts.Game
 
         private float _targetIntensity;
         private float _storyDelayTimer;
+        
+        [Inject] private DayNightController _dayNightController;
 
         private async void Start()
         {

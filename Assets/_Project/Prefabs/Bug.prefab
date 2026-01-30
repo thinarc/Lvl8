@@ -366,11 +366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b19f175cf52ba746a4c60a9f48dd28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHp: 25
+  startHp: 28
   hp: 0
   intensityAmp: 0.25
   radiusAmp: 0.07
   speedPulse: 3
+  died: 0
 --- !u!114 &5648867253416081155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathToFollow: {fileID: 0}
-  speed: 0.6
+  speed: 0.64
   OffsetX: 0
   OffsetY: 0
   OffsetZ: 0

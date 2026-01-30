@@ -57,11 +57,13 @@ namespace _Project.Scripts.HUD
             if (willowCore.CurrentHp != 0) _initialized = true;
             if (!_initialized) return;
             
-            if (willowText.text != $"{willowCore.CurrentHp} / {willowCore.MaxHp}") willow.Play();
-            willowText.text = $"{willowCore.CurrentHp} / {willowCore.MaxHp}";
+            if (willowText.text != $"{willowCore.CurrentHp:F0} / {willowCore.MaxHp:F0}") willow.Play();
+            willowText.text = $"{willowCore.CurrentHp:F0} / {willowCore.MaxHp:F0}";
             var time = dayNightController.CurrentTime;
             if (time < 1f) time = 1f;
-            timerText.text = time.ToString("F0") + "s";
+            timerText.text = time.ToString("F0");
+            if (LangManager.LocalLang == "en") timerText.text += "s";
+            else timerText.text += "с";
             if (dayNightController.CurrentTime < 0.8f) timerText.text += "..";
         }
     }

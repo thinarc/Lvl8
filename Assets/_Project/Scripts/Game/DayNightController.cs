@@ -1,8 +1,11 @@
 using System;
+using _Project.Scripts.HUD;
+using _Project.Scripts.Willow;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace _Project.Scripts.Game
@@ -88,7 +91,6 @@ namespace _Project.Scripts.Game
         {
             currentPhase = DayPhase.Night;
             _nights++;
-            print(_nights);
             if (_nights == 6) Pass?.Invoke();
             _timer = nightDuration;
             NightStarted?.Invoke();
@@ -101,6 +103,16 @@ namespace _Project.Scripts.Game
             });
             
             _sound.PlayNight();
+        }
+
+        public void CallRestart()
+        {
+            _sound.ResetSound();
+            DefeatPanel._init = false;
+            WillowController.Subscribed = false;
+            Stats.Sub = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            print("restart");
         }
     }
 }

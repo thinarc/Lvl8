@@ -46,7 +46,9 @@ namespace _Project.Scripts.Bug
             
             _time += Time.deltaTime * speedPulse;
         }
-    
+
+
+        public bool died;
         public float TakeDamage(float damage)
         {
             if (hp - damage > 0)
@@ -65,9 +67,11 @@ namespace _Project.Scripts.Bug
                 transform.DOScale(scale * 1.24f, 0.2f).SetEase(Ease.Linear).OnComplete(() => transform.DOScale(scale, 0.1f));
                 return 0;
             }
+
+            died = true;
             var retHp = (hp - damage) * -1;
             hp = 0;
-            transform.DOScale(0, 0.5f).SetEase(Ease.Linear).OnComplete(() => Destroy(gameObject));
+            transform.DOScale(0, 0.4f).SetEase(Ease.Linear).OnComplete(() => Destroy(gameObject));
             return retHp;
         }
 

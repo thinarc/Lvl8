@@ -2,14 +2,17 @@ using _Project.Scripts.HUD;
 using _Project.Scripts.Willow;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace _Project.Scripts.Game
 {
     public class VictoryPanel : MonoBehaviour
     {
+        [Inject] private DayNightController _dayNightController;
         [SerializeField] private CanvasGroup panel1;
         [SerializeField] private CanvasGroup panel2;
         [SerializeField] private Image button;
@@ -21,7 +24,6 @@ namespace _Project.Scripts.Game
         
         private void Start()
         {
-            print("sub");
             FindAnyObjectByType<DayNightController>().Pass += OnPass;
             if (!_init)
             {
@@ -51,7 +53,7 @@ namespace _Project.Scripts.Game
         {
             print(("OnPass"));
             
-            FindAnyObjectByType<WillowController>().transform.DOScale(2, 2f).SetEase(Ease.OutBack).SetUpdate(true);
+            FindAnyObjectByType<WillowController>().transform.DOScale(1.4f, 2f).SetEase(Ease.OutBack).SetUpdate(true);
             await UniTask.Delay(2400);
             
             panel1.transform.DOScale(0, 0f).SetEase(Ease.InBack);
@@ -67,6 +69,11 @@ namespace _Project.Scripts.Game
             Time.timeScale = 0;
             panel2.DOFade(1, 0.3f).SetUpdate(true);
             panel1.DOFade(1, 0.2f).SetUpdate(true);
+            if (LangManager.LocalLang == "ru")
+            {
+                panel1.GetComponent<TextMeshProUGUI>().text = "Дерево откликнулось. Рост сохранен.\nСпасибо за игру ;)";
+                button.GetComponentInChildren<TextMeshProUGUI>().text = "Заново";
+            }
             button.DOFade(1, 0.2f).SetUpdate(true).SetDelay(2.6f);
             button.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).SetUpdate(true).SetDelay(2.6f);
             panel1.transform.DOMove(panel1.transform.position + new Vector3(0, 0.2f, 0), 0.3f).SetEase(Ease.OutBack).SetUpdate(true).SetDelay(2.6f);
@@ -91,8 +98,8 @@ namespace _Project.Scripts.Game
             button.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
             panel1.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
             
-            await UniTask.Delay(200);
-            print("Scene restart");
+            await UniTask.Delay(500);
+            _dayNightController.CallRestart();
         }
     }
 }

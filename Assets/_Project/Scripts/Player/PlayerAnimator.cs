@@ -49,7 +49,7 @@ namespace _Project.Scripts.Player
             HandleIdleSpeed();
             HandleCharacterTilt();
             
-            if (_player.FlyHeld) anim.SetFloat(FlewSpeedKey, 1.25f);
+            if (_player.FrameInput.y > 0) anim.SetFloat(FlewSpeedKey, 1.25f);
             else anim.SetFloat(FlewSpeedKey, 0.62f);
         }
         

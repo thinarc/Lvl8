@@ -63,6 +63,7 @@ namespace _Project.Scripts.Player
             if (upgrade.type == UpgradeType.HaloPower)
             {
                 _dmgMultiplier *= upgrade.value;
+                _glowIntensity *= 1.064f;
                 speedPulse += 0.1f;
             }
 
@@ -95,12 +96,12 @@ namespace _Project.Scripts.Player
             LightPulse.GetPulse(_haloLight, intensity, rad, _time, intensityAmp, radiusAmp);
             _time += Time.deltaTime * speedPulse;
 
-            if (UnityEngine.Input.GetKey(KeyCode.F))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Mouse1) && !_splashed)
             {
                 GetComponent<CircleCollider2D>().radius = _startRad / (stats.splashMultiplier / 2);
                 _splashed = true;
             }
-            else
+            else if (UnityEngine.Input.GetKeyDown(KeyCode.Mouse1) && _splashed)
             {
                 GetComponent<CircleCollider2D>().radius = _startRad;
                 _splashed = false;
@@ -144,6 +145,7 @@ namespace _Project.Scripts.Player
             var dmgWithoutUpgrade = stats.haloDamage;
             if (_splashed) dmgWithoutUpgrade *= stats.splashMultiplier;
             var dmg = dmgWithoutUpgrade * _dmgMultiplier;
+            dmgWithoutUpgrade *= _dmgMultiplier / 2.1f;
             if (!_haloReserve.TrySpendReserve(dmgWithoutUpgrade)) return;
             var retHealth = bugCore.TakeDamage(dmg);
             _haloReserve.AddReserve(retHealth);

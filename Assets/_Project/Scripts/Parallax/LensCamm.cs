@@ -37,7 +37,10 @@ namespace _Project.Scripts.Parallax
                 {
                     vCams[core.GetCamLens()].gameObject.SetActive(true);
                 }
-                catch {}
+                catch
+                {
+                    vCams[^1].gameObject.SetActive(true);
+                }
             }
         }
     }

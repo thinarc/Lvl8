@@ -30,6 +30,7 @@ namespace _Project.Scripts.Game
         private void OnNightStarted()
         {
             currentState++;
+            _spawnTimer = spawnStats[currentState].spawnDelay;
             _currentBugs = 0;
         }
 
@@ -56,6 +57,7 @@ namespace _Project.Scripts.Game
     [System.Serializable]
     public class SpawnStats
     {
+        public float spawnDelay;
         public float spawnInterval;
         public int maxBugs;
     }

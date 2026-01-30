@@ -59,11 +59,15 @@ namespace _Project.Scripts.Willow
 
         private void Update()
         {
+            if (_dayNightController.currentPhase == DayNightController.DayPhase.Day) TakeHp(3 * Time.deltaTime);
+            
             _animHp = Mathf.MoveTowards(_animHp, hp, Time.deltaTime * 40);
             
             _glow.intensity = _glowIntensity * (_animHp / startHp);
             _glow.pointLightOuterRadius = _glowRadius * (_animHp / startHp);
             LightPulse.GetPulse(_glow, _glow.intensity, _glow.pointLightOuterRadius, _time, intensityAmp, radiusAmp);
+
+            if (_colliderCOnst > 0.1f) GetComponent<CircleCollider2D>().radius = _colliderCOnst * (_animHp / startHp);
             
             _time += Time.deltaTime * speedPulse;
         }
@@ -98,16 +102,19 @@ namespace _Project.Scripts.Willow
                 GetComponentInChildren<SpriteRenderer>().flipX = true;
             }
             speedPulse = _stSpeedPulse * glowModifier / 2;
-            if (glowModifier >= 4f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 5f;
-            else if (glowModifier >= 3.4f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 3.3f;
-            else if (glowModifier >= 2.8f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 2.1f;
-            else if (glowModifier > 1f) GetComponent<CircleCollider2D>().radius = _radiusCollider * glowModifier / 1.48f;
+            _colliderCOnst = _radiusCollider;
+            if (glowModifier >= 4f) _colliderCOnst = _radiusCollider * glowModifier / 5f;
+            else if (glowModifier >= 3.4f) _colliderCOnst =  _radiusCollider * glowModifier / 3.3f;
+            else if (glowModifier >= 2.8f) _colliderCOnst = _radiusCollider * glowModifier / 2.1f;
+            else if (glowModifier > 1f) _colliderCOnst = _radiusCollider * glowModifier / 1.48f;
             
             branches = newBranches;
             form = newForm;
             
             ReadyToReceiveBranches?.Invoke();
         }
+
+        private float _colliderCOnst;
         
         public void CallGrew()
         {
@@ -159,6 +166,12 @@ namespace _Project.Scripts.Willow
             _died = true;
             Died = true;
             OnDied?.Invoke();
+        }
+        
+        public void TakeHp(float heal)
+        {
+            if (hp + heal < startHp) hp += heal;
+            else hp = startHp;
         }
     }
 }

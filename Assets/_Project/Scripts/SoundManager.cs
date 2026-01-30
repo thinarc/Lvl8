@@ -7,6 +7,7 @@ namespace _Project.Scripts
     {
         public static SoundManager instance;
         
+        public AudioSource idleSource;
         public AudioSource daySource;
         public AudioSource nightSource;
         public AudioSource sfx1;
@@ -23,6 +24,7 @@ namespace _Project.Scripts
             startBgVolume = daySource.volume;
             startSfxVolume = sfx1.volume;
 
+            idleSource.volume = startBgVolume * bgVolume;
             daySource.volume = startBgVolume * bgVolume;
             nightSource.volume *= startBgVolume * bgVolume;
             sfx1.volume = startSfxVolume * sfxVolume;
@@ -31,16 +33,49 @@ namespace _Project.Scripts
             instance = this;
         }
 
+        public void UpdateSaves(float bg, float sfx)
+        {
+            bgVolume = bg;
+            sfxVolume = sfx;
+            
+            idleSource.volume = startBgVolume * bgVolume;
+            daySource.volume = startBgVolume * bgVolume;
+            nightSource.volume *= startBgVolume * bgVolume;
+            sfx1.volume = startSfxVolume * sfxVolume;
+            sfx2.volume = startSfxVolume * sfxVolume;
+        }
+
+        public void ResetSound()
+        {
+            idleSource.time = 0f;
+            daySource.time = 0f;
+            nightSource.time = 0f;
+            _dayQueue = 0;
+        }
+
+        private int _dayQueue;
         public void PlayDay()
         {
-            daySource.DOFade(startBgVolume * bgVolume, 2f).SetEase(Ease.Linear).SetUpdate(true);
+            if (_dayQueue == 0)
+            {
+                idleSource.DOFade(startBgVolume * bgVolume, 2f).SetEase(Ease.Linear).SetUpdate(true);
+                daySource.DOFade(0, 2f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => daySource.Pause());
+                idleSource.Play();
+                _dayQueue = 1;
+            }
+            else
+            {
+                daySource.DOFade(startBgVolume * bgVolume, 2f).SetEase(Ease.Linear).SetUpdate(true);
+                idleSource.DOFade(0, 2f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => idleSource.Pause());
+                daySource.Play();
+            }
             nightSource.DOFade(0, 2f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => nightSource.Pause());
-            daySource.Play();
         }
 
         public void PlayNight()
         {
             nightSource.DOFade(startBgVolume * bgVolume, 2f).SetEase(Ease.Linear).SetUpdate(true);
+            idleSource.DOFade(0, 2f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => idleSource.Pause());
             daySource.DOFade(0, 2f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => daySource.Pause());
             nightSource.Play();
         }
