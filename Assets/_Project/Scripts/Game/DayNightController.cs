@@ -78,6 +78,7 @@ namespace _Project.Scripts.Game
         {
             _callBefore = false;
             currentPhase = DayPhase.Day;
+            if (_nights == 5) Pass?.Invoke();
             _timer = dayDuration;
             DayStarted?.Invoke();
             PhaseChanged?.Invoke();
@@ -91,7 +92,6 @@ namespace _Project.Scripts.Game
         {
             currentPhase = DayPhase.Night;
             _nights++;
-            if (_nights == 6) Pass?.Invoke();
             _timer = nightDuration;
             NightStarted?.Invoke();
             PhaseChanged?.Invoke();

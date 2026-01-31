@@ -48,6 +48,9 @@ namespace _Project.Scripts.Player
             HandleSpriteFlip();
             HandleIdleSpeed();
             HandleCharacterTilt();
+            if (_player.FrameInput.y > 0) OnFlew();
+            else if (_player.FrameInput.y == 0) anim.SetTrigger("Idled");
+            else if (_player.FrameInput.y < 0 && !_grounded) OnFlew();
             
             if (_player.FrameInput.y > 0) anim.SetFloat(FlewSpeedKey, 1.25f);
             else anim.SetFloat(FlewSpeedKey, 0.62f);

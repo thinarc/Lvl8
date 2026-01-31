@@ -52,9 +52,9 @@ namespace _Project.Scripts.Game
         private async void OnPass()
         {
             print(("OnPass"));
-            
-            FindAnyObjectByType<WillowController>().transform.DOScale(1.4f, 2f).SetEase(Ease.OutBack).SetUpdate(true);
-            await UniTask.Delay(2400);
+            Debug.ClearDeveloperConsole();
+            FindAnyObjectByType<WillowController>().transform.DOScale(1.2f, 2f).SetEase(Ease.OutBack).SetUpdate(true);
+            await UniTask.Delay(2600);
             
             panel1.transform.DOScale(0, 0f).SetEase(Ease.InBack);
             button.transform.DOScale(0, 0f).SetEase(Ease.InBack);
@@ -71,7 +71,7 @@ namespace _Project.Scripts.Game
             panel1.DOFade(1, 0.2f).SetUpdate(true);
             if (LangManager.LocalLang == "ru")
             {
-                panel1.GetComponent<TextMeshProUGUI>().text = "Дерево откликнулось. Рост сохранен.\nСпасибо за игру ;)";
+                panel1.GetComponent<TextMeshProUGUI>().text = "Рост сохранен. Спасибо за игру ;)";
                 button.GetComponentInChildren<TextMeshProUGUI>().text = "Заново";
             }
             button.DOFade(1, 0.2f).SetUpdate(true).SetDelay(2.6f);

@@ -78,7 +78,7 @@ namespace _Project.Scripts.Bug
             }
             
             if (!_startMoving && _agent.currentTValue != 0) _startMoving = true;
-            if (!_attackWillow && _agent.pathToFollow && _startMoving && _agent.currentTValue == 0)
+            if (!_attackWillow && _agent.pathToFollow && _startMoving && _agent.ReachedEnd())
             {
                 _attackWillow = true;
                 _attackTimer = delayBeforeAttack;

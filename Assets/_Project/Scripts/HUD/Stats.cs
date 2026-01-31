@@ -59,6 +59,10 @@ namespace _Project.Scripts.HUD
             
             if (willowText.text != $"{willowCore.CurrentHp:F0} / {willowCore.MaxHp:F0}") willow.Play();
             willowText.text = $"{willowCore.CurrentHp:F0} / {willowCore.MaxHp:F0}";
+            if (willowCore.MaxHp == 900)
+            {
+                willowText.text = "Inf / INF";
+            }
             var time = dayNightController.CurrentTime;
             if (time < 1f) time = 1f;
             timerText.text = time.ToString("F0");

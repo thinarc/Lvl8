@@ -84,7 +84,7 @@ namespace _Project.Scripts.Bug
         
         public void TakeHp(float hpToAdd)
         {
-            startHp += hpToAdd;
+            startHp += hpToAdd / 2.4f;
             _expandedHp += hpToAdd;
             hp += hpToAdd;
         }

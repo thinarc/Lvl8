@@ -27,6 +27,8 @@ namespace _Project.Scripts.Player
             _reserveSlider.maxValue = maxReserve;
             
             _currentReserve = 0f;
+            _currentAnimReserve = 0f;
+            _reserveSlider.value = 0f;
         }
         
         public void ApplyUpgrade(UpgradeData upgrade)
@@ -50,9 +52,9 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
-            if (Time.timeScale != 0f) AddReserve(idleRechargeRate / 100);
+            if (Time.timeScale != 0f) AddReserve(idleRechargeRate * Time.deltaTime);
             
-            _currentAnimReserve = Mathf.MoveTowards(_currentAnimReserve, _currentReserve, Time.deltaTime * 50);
+            _currentAnimReserve = Mathf.MoveTowards(_currentAnimReserve, _currentReserve, Time.deltaTime * 8);
             _reserveSlider.value = _currentAnimReserve;
         }
 

@@ -16534,8 +16534,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288192712
-  m_fontColor: {r: 0.7830189, g: 0.627664, b: 0.5946511, a: 1}
+    rgba: 4279637300
+  m_fontColor: {r: 0.20392159, g: 0.08235294, b: 0.08627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16826,9 +16826,9 @@ MonoBehaviour:
   - {fileID: 7772884388015980309, guid: 83538aea0a3b822499b0981a079c09bc, type: 3}
   - {fileID: 1243662289877060760, guid: a098857fb7152b648b132b778b64e398, type: 3}
   minBounds: {x: -5.15, y: -7.01}
-  maxBounds: {x: 5.65, y: 12.46}
-  minSpawnInterval: 2
-  maxSpawnInterval: 12
+  maxBounds: {x: 5.65, y: 17}
+  minSpawnInterval: 2.4
+  maxSpawnInterval: 14
   parent: {fileID: 609113846}
 --- !u!1 &619394800
 GameObject:
@@ -16950,22 +16950,22 @@ MonoBehaviour:
   core: {fileID: 2068855075}
   spawnStats:
   - spawnDelay: 3
-    spawnInterval: 3.8
+    spawnInterval: 3.6
     maxBugs: 6
   - spawnDelay: 1
-    spawnInterval: 2.86
+    spawnInterval: 2.64
     maxBugs: 14
   - spawnDelay: 0
-    spawnInterval: 2.38
+    spawnInterval: 2.2
     maxBugs: 40
   - spawnDelay: 0
-    spawnInterval: 1.34
+    spawnInterval: 1.7
     maxBugs: 60
   - spawnDelay: 0
-    spawnInterval: 1.86
+    spawnInterval: 1.24
     maxBugs: 80
   - spawnDelay: 0
-    spawnInterval: 1.58
+    spawnInterval: 1.08
     maxBugs: 140
   currentState: 0
 --- !u!1 &619814427
@@ -17661,39 +17661,39 @@ MonoBehaviour:
   forms:
   - startHp: 100
     glowModifier: 1
-    healthPlayer: 1
-    healthPlayerDelay: 0.2
-    bugMultiplier: 1.1
-    camLens: 0
-  - startHp: 240
-    glowModifier: 1.6
     healthPlayer: 2
     healthPlayerDelay: 0.2
-    bugMultiplier: 1.3
+    bugMultiplier: 1.138
+    camLens: 0
+  - startHp: 240
+    glowModifier: 2
+    healthPlayer: 2.6
+    healthPlayerDelay: 0.2
+    bugMultiplier: 1.367
     camLens: 1
   - startHp: 400
-    glowModifier: 2.2
-    healthPlayer: 3
+    glowModifier: 3.3
+    healthPlayer: 3.44
     healthPlayerDelay: 0.2
-    bugMultiplier: 1.56
+    bugMultiplier: 1.58
     camLens: 2
   - startHp: 540
-    glowModifier: 2.8
-    healthPlayer: 4
+    glowModifier: 3.8
+    healthPlayer: 4.1
     healthPlayerDelay: 0.2
     bugMultiplier: 1.64
     camLens: 3
   - startHp: 760
-    glowModifier: 3.4
-    healthPlayer: 6
+    glowModifier: 4
+    healthPlayer: 5.2
     healthPlayerDelay: 0.2
-    bugMultiplier: 1.7
+    bugMultiplier: 1.74
     camLens: 4
   - startHp: 900
     glowModifier: 4
-    healthPlayer: 8
+    healthPlayer: 5.8
     healthPlayerDelay: 0.2
-    bugMultiplier: 1.88
+    bugMultiplier: 1.82
     camLens: 5
   startStage: 0
 --- !u!1 &722832984
@@ -21961,12 +21961,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ea9c50dd35ae740b6855df373ed6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxReserve: 100
-  idleRechargeRate: 1
+  maxReserve: 120
+  idleRechargeRate: 1.8
   reserveFill: {fileID: 1468900917}
   oldColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.98039216}
-  dmgColor: {r: 0.69374406, g: 0.38892844, b: 0.8679245, a: 1}
+  blinkColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.98039216}
+  dmgColor: {r: 0.68040663, g: 0.3479886, b: 0.8679245, a: 1}
 --- !u!225 &1161444673
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -22773,9 +22773,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The tree responded. Growth is saved.
-
-    Thanks for playing ;)'
+  m_text: Growth is saved. Thanks for playing ;)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02cbde6726f40c34189278cb6c0e2084, type: 2}
   m_sharedMaterial: {fileID: -1333613358945637099, guid: 02cbde6726f40c34189278cb6c0e2084, type: 2}
@@ -22784,8 +22782,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287668721
-  m_fontColor: {r: 0.94509804, g: 0.6313726, b: 0.5647059, a: 1}
+    rgba: 4279637300
+  m_fontColor: {r: 0.20392157, g: 0.08235294, b: 0.08627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -46096,7 +46094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2012409571
 Transform:
   m_ObjectHideFlags: 0

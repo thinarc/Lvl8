@@ -46,6 +46,8 @@ namespace _Project.Scripts.Player
             _attDelay = stats.haloDelay;
             
             _time = Random.Range(0f, 1000f);
+            
+            _healthTimer = 0.6f;
         }
 
 
@@ -145,7 +147,7 @@ namespace _Project.Scripts.Player
             var dmgWithoutUpgrade = stats.haloDamage;
             if (_splashed) dmgWithoutUpgrade *= stats.splashMultiplier;
             var dmg = dmgWithoutUpgrade * _dmgMultiplier;
-            dmgWithoutUpgrade *= _dmgMultiplier / 2.1f;
+            dmgWithoutUpgrade *= _dmgMultiplier / 1.46f;
             if (!_haloReserve.TrySpendReserve(dmgWithoutUpgrade)) return;
             var retHealth = bugCore.TakeDamage(dmg);
             _haloReserve.AddReserve(retHealth);
