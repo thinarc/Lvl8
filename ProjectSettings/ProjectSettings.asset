@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: ThinArc
   productName: Thin Willow
-  defaultCursor: {fileID: 2800000, guid: 2399ec6f923f7b44bb9acf82e97fc6c1, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 2f1a038867458c3499efcfdff7598391, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 0
